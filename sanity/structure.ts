@@ -10,8 +10,9 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('category').title('Categories'),
       S.documentTypeListItem('order').title('Orders'),
       S.documentTypeListItem('sale').title('Sales'),
+      S.documentTypeListItem('navigation').title('Navigation'),
       S.divider(),
      ...S.documentTypeListItems().filter(
-      (item) => item.getId() && !['product', 'category', 'order', 'sale'].includes(item.getId()!)
+      (item) => item.getId() && !['product', 'category', 'order', 'sale', 'navigation'].includes(item.getId()!)
      )
     ])

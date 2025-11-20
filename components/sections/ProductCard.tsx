@@ -1,9 +1,5 @@
-
 import Image from 'next/image'
-
 import Link from 'next/link'
-
-
 import type { Product } from '@/sanity.types'
 import { imageUrl } from '@/lib/ImageUrl'
 
@@ -22,7 +18,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   const truncatedDescription =
     description.length > 100
-      ? description.substring(0, 100) + '...'
+      ? description.substring(0, 50) + '...'
       : description
 
   return (
@@ -30,7 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
       href={`/product/${product.slug?.current}`}
       className={`group flex flex-col items-start justify-between gap-6 p-6 border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer ${
         isOutOfStock ? 'opacity-50 pointer-events-none' : ''
-      } w-[300px] h-[400px]`}
+      } max-w-[300px] h-[400px] shrink-0`}
     >
       {/* Image */}
       <div className='relative w-full h-[220px] overflow-hidden rounded-lg'>
@@ -45,7 +41,7 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
 
         {isOutOfStock && (
-          <div className='absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg'>
+          <div className='absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg'>
             <span className='text-white text-sm font-semibold'>
               Out of stock
             </span>
@@ -56,7 +52,7 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* Text Content */}
       <div className='w-full mt-4 flex flex-col justify-between h-[150px]'>
         <h2 className='text-lg font-semibold text-gray-800'>{product.name}</h2>
-        <p className='mt-2 text-sm text-gray-600 truncate'>
+        <p className='mt-2 text-sm text-gray-600 line-clamp-3'>
           {truncatedDescription}
         </p>
         <p className='mt-4 text-lg font-bold text-gray-900'>

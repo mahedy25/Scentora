@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-[#D9004C] text-white hover:bg-[#A5003D] cursor-pointer', // Updated button color to #D9004C with hover effect
+        default: 'bg-[#D9004C] text-white hover:bg-[#A5003D] cursor-pointer hover:ring-2 hover:ring-[#D9004C]', // Updated button color to #D9004C with hover effect
         destructive:
           'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:

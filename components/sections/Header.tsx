@@ -14,7 +14,12 @@ import { useCartStore } from '@/app/(store)/store'
 import Form from 'next/form'
 import { useState } from 'react'
 import { XIcon } from 'lucide-react'
+import { Lobster } from 'next/font/google'
 
+const lobster = Lobster({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function Header() {
   const { user } = useUser()
@@ -31,7 +36,7 @@ export default function Header() {
     }
   }
 
-   const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
   // Clear the search input when X is clicked
   const clearSearch = () => setSearchQuery('')
@@ -40,7 +45,7 @@ export default function Header() {
     <section className='flex flex-wrap justify-between items-center px-6 py-4 bg-white shadow-md'>
       <Link
         href='/'
-        className='text-3xl font-extrabold text-[#670626] hover:text-[#670626]/90 cursor-pointer'
+        className={`text-4xl ${lobster.className}  text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide`}
       >
         Cube Fashion
       </Link>
@@ -49,20 +54,20 @@ export default function Header() {
         action='/search'
         className='w-full sm:w-auto sm:flex-1 sm:mx-6 mt-4 sm:mt-0'
       >
-        <div className='relative w-full'>
+        <div className='relative w-full max-w-full sm:max-w-xl'>
           <input
             type='text'
             name='query'
             value={searchQuery} // Bind the input value to state
             onChange={(e) => setSearchQuery(e.target.value)} // Update the state as the user types
             placeholder='Search for products'
-            className='bg-gray-200 text-gray-800 px-5 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#670626] focus:ring-opacity-75 w-full sm:max-w-xl'
+            className='bg-gray-200 text-gray-800 px-5 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#670626] focus:ring-opacity-75 w-full text-lg pr-10'
           />
           {searchQuery && (
             <button
               type='button'
               onClick={clearSearch} // Clear the search when clicked
-              className='cursor-pointer absolute top-1/2 right-4 transform -translate-y-1/2 text-black'
+              className='cursor-pointer absolute top-1/2 right-3 transform -translate-y-1/2 text-black'
             >
               <XIcon className='w-5 h-5' />
             </button>
@@ -73,7 +78,7 @@ export default function Header() {
       <div className='flex items-center space-x-4 mt-4 sm:mt-0'>
         <Link
           href='/cart'
-          className='relative flex justify-center items-center space-x-2 bg-[#670626] text-white hover:bg-[#670626]/90 font-semibold py-2 px-4 rounded-lg transition-all'
+          className='relative flex justify-center items-center space-x-2 bg-[#D9004C] text-white hover:bg-[#A5003D] font-semibold py-2 px-4 rounded-lg transition-all'
         >
           <TrolleyIcon className='w-6 h-6' />
           {/* Item count badge */}
@@ -88,7 +93,7 @@ export default function Header() {
             {user && (
               <Link
                 href='/orders'
-                className='flex justify-center items-center space-x-2 bg-[#670626] text-white hover:bg-[#670626]/90 font-semibold py-2 px-4 rounded-lg transition-all'
+                className='flex justify-center items-center space-x-2 bg-[#D9004C] text-white hover:bg-[#A5003D] font-semibold py-2 px-4 rounded-lg transition-all'
               >
                 <PackageIcon className='w-6 h-6' />
                 <span className='hidden sm:block'>Orders</span>
@@ -97,24 +102,31 @@ export default function Header() {
           </SignedIn>
 
           {user ? (
-            <div className='flex items-center space-x-3'>
-              <UserButton />
+            <div className='flex items-center space-x-2'>
+              <div className='w-8 h-8 rounded-full border-2 border-[#670626]'>
+                <UserButton />
+              </div>
+
               <div className='hidden sm:flex flex-col items-start'>
-                <p className='text-green-500 font-medium'>Welcome Back</p>
-                <p className='font-semibold'>
+                <p className='text-xs text-[#670626] font-medium'>
+                  Welcome Back
+                </p>
+                <p className='text-sm font-semibold'>
                   {user.fullName ?? user.username}
                 </p>
               </div>
             </div>
           ) : (
-            <SignInButton mode='modal' />
+            <div className='py-1 px-3 text-sm bg-[#D9004C] text-white rounded-full hover:bg-[#A5003D] transition-all'>
+              <SignInButton mode='modal' />
+            </div>
           )}
 
           {/* Passkey button for users without passkeys */}
           {user?.passkeys.length === 0 && (
             <Button
               onClick={createClerkPasskey}
-              className='text-sm py-1.5 px-3 bg-[#670626] text-white rounded-full mt-3 sm:mt-0'
+              className='text-sm py-1.5 px-3 bg-[#D9004C] text-white rounded-full mt-3 sm:mt-0 hover:bg-[#A5003D]'
             >
               Create passkey
             </Button>

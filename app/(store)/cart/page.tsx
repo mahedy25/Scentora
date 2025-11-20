@@ -1,7 +1,6 @@
 'use client'
 
 import { SignInButton, useAuth, useUser } from '@clerk/nextjs'
-
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import AddToCartButton from '@/components/AddToCartButton'
@@ -9,10 +8,17 @@ import Image from 'next/image'
 import { imageUrl } from '@/lib/ImageUrl'
 import Loader from '@/components/Loader'
 import { useCartStore } from '../store'
-import { createCheckoutSession, Metadata } from '@/actions/createCheckoutSession'
+import {
+  createCheckoutSession,
+  Metadata,
+} from '@/actions/createCheckoutSession'
+import { Button } from '@/components/ui/button'
+import { Lobster } from 'next/font/google'
 
-
-
+const lobster = Lobster({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function Cart() {
   const groupedItems = useCartStore((state) => state.getGroupedItems())
@@ -23,7 +29,7 @@ export default function Cart() {
   const [isClient, setIsClient] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  //wait for client to mount
+  // Wait for the client to mount
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -35,8 +41,8 @@ export default function Cart() {
   if (groupedItems.length === 0) {
     return (
       <div className='container mx-auto p-4 flex flex-col items-start justify-start h-screen'>
-        <h1 className='text-2xl font-bold mb-6 text-gray-800'>
-          Your Shopping Cart
+        <h1 className={`${lobster.className} text-2xl font-bold mb-6 text-gray-800`}>
+          My Shopping Cart
         </h1>
         <p className='text-gray-600 text-lg'>Your cart is currently empty</p>
       </div>
@@ -49,17 +55,17 @@ export default function Cart() {
 
     try {
       const metadata: Metadata = {
-        orderNumber: crypto.randomUUID(), //example: '1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z',
+        orderNumber: crypto.randomUUID(),
         customerName: user?.fullName ?? 'Unknown',
         customerEmail: user?.emailAddresses[0].emailAddress ?? 'Unknown',
         clerkUserId: user!.id,
-      };
-      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
-      if(checkoutUrl){
-        window.location.href = checkoutUrl;
+      }
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata)
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl
       }
     } catch (error) {
-      console.log("Error creating checkout session:", error);
+      console.log('Error creating checkout session:', error)
     } finally {
       setIsLoading(false)
     }
@@ -67,8 +73,8 @@ export default function Cart() {
 
   return (
     <div className='container mx-auto p-4 max-w-6xl'>
-      <h1 className='text-2xl font-bold mb-6 text-gray-800'>
-        Your Shopping Cart
+      <h1 className={`${lobster.className} text-2xl font-bold mb-6 text-gray-800`}>
+        My Shopping Cart
       </h1>
       <div className='flex flex-col lg:flex-row gap-8'>
         <div className='grow'>
@@ -127,23 +133,23 @@ export default function Cart() {
             </p>
           </div>
           {isSignedIn ? (
-            <button
+            <Button
               onClick={handleCheckout}
               disabled={isLoading}
-              className='mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400'
+              className='mt-4 w-full bg-[#670626] text-white px-4 py-2 rounded hover:bg-[#D9004C] disabled:bg-gray-400'
             >
               {isLoading ? 'Processing...' : 'Checkout'}
-            </button>
+            </Button>
           ) : (
             <SignInButton mode='modal'>
-              <button className='mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'>
+              <Button className='mt-4 w-full bg-[#670626] text-white px-4 py-2 rounded hover:bg-[#D9004C]'>
                 Sign in to Checkout
-              </button>
+              </Button>
             </SignInButton>
           )}
         </div>
         <div className='h-64 lg:h-0'>
-          {/* spacer for fixed checkout on mobile */}
+          {/* Spacer for fixed checkout on mobile */}
         </div>
       </div>
     </div>

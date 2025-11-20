@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import '../globals.css'
 import Header from '@/components/sections/Header'
 import { SanityLive } from '@/sanity/lib/live'
+import { Navbar } from '@/components/sections/Navbar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,16 +28,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider >
+    <ClerkProvider dynamic>
       <html lang='en'>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <main>
-            <Header />
-            {children}
-            <SanityLive />
-          </main>
+          <SidebarProvider>
+            <main className='w-full'>
+              <Header />
+              <Navbar />
+              {children}
+              <SanityLive />
+            </main>
+          </SidebarProvider>
         </body>
       </html>
     </ClerkProvider>

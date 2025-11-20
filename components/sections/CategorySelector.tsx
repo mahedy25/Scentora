@@ -31,7 +31,7 @@ export function CategorySelector({ categories }: CategorySelectorProps) {
           variant='outline'
           role='combobox'
           aria-expanded={open}
-          className='w-full max-w-full flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-linear-to-r from-[#670626] to-[#D9004C] text-white hover:text-white font-bold py-2 px-4 rounded cursor-pointer hover:scale-105 transition-all'
+          className='w-full max-w-[250px] mx-auto flex justify-center items-center space-x-2 bg-linear-to-r from-[#670626] to-[#D9004C] text-white hover:text-white font-bold py-2 px-4 rounded cursor-pointer hover:scale-105 transition-all'
         >
           {value
             ? categories.find((category) => category._id === value)?.title
@@ -39,7 +39,7 @@ export function CategorySelector({ categories }: CategorySelectorProps) {
           <ChevronsUpDown className='ml-2 h-4 w-4' />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-full p-0'>
+      <PopoverContent className='w-full max-w-[250px] mx-auto p-0'>
         <Command>
           <CommandInput
             className='h-15'
@@ -47,7 +47,8 @@ export function CategorySelector({ categories }: CategorySelectorProps) {
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 const selectedCategory = categories.find((c) =>
-                  c.title?.toLowerCase()
+                  c.title
+                    ?.toLowerCase()
                     .includes(e.currentTarget.value.toLowerCase())
                 )
                 if (selectedCategory?.slug?.current) {
