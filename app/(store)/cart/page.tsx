@@ -152,7 +152,7 @@ export default function Cart() {
             <Button
               onClick={handleCheckout}
               disabled={isLoading}
-              className='mt-4 w-full bg-[#670626] text-white px-4 py-2 rounded hover:bg-[#D9004C] disabled:bg-gray-400'
+              className='mt-4 w-full  px-4 py-2 rounded  disabled:bg-gray-400'
             >
               {isLoading ? 'Processing...' : 'Checkout'}
             </Button>
