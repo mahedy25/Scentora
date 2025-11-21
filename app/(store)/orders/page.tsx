@@ -21,37 +21,44 @@ export default async function Orders() {
   const orders = await getMyOrders(userId)
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6'>
-      <div className='bg-white p-6 sm:p-8 rounded-xl shadow-lg w-full mb-8'>
+    <div className='flex flex-col items-center justify-center min-h-screen bg-linear-to-b from-gray-100 to-gray-200'>
+      <div className='bg-white p-6 sm:p-8 rounded-xl shadow-xl w-full max-w-5xl backdrop-blur'>
         <h1
-          className={`${lobster.className} text-3xl sm:text-4xl font-bold text-[#670626] tracking-tight mb-8`}
+          className={`text-5xl ${lobster.className} text-[#670626] text-center tracking-wide mb-6`}
         >
-          Orders
+          My Orders
         </h1>
+
+        <hr className='border-t-2 border-[#670626] mb-8 opacity-60' />
+
         {orders.length === 0 ? (
-          <div className='text-center text-gray-600'>
-            <p>Your cart is currently empty</p>
+          <div className='text-center text-gray-600 py-12'>
+            <p className='text-lg'>You haven’t placed any orders yet.</p>
           </div>
         ) : (
-          <div className='space-y-6 sm:space-y-8'>
+          <div className='space-y-8'>
             {orders.map((order) => (
               <div
                 key={order.orderNumber}
-                className='bg-white border-gray-300 rounded-lg shadow-sm overflow-hidden'
+                className='bg-white/80 border border-gray-200 rounded-xl shadow-md transition hover:shadow-lg hover:border-gray-300'
               >
-                <div className='p-4 sm:p-8 border-b border-gray-400'>
-                  <div className='flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-4'>
+                <div className='p-6 border-b border-gray-200'>
+                  {/* Order Header */}
+                  <div className='flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-center'>
                     <div>
-                      <p className='text-sm text-gray-800 mb-1 font-bold'>
-                        Order Number:
+                      <p className='text-sm font-semibold text-gray-700'>
+                        Order Number
                       </p>
-                      <p className='font-mono text-sm text-green-700 break-all'>
+                      <p className='font-mono text-sm text-green-700 break-all mt-1'>
                         {order.orderNumber}
                       </p>
                     </div>
+
                     <div className='sm:text-right'>
-                      <p className='text-sm text-gray-600 mb-1'>Order Date:</p>
-                      <p className='font-medium'>
+                      <p className='text-sm font-semibold text-gray-700'>
+                        Order Date
+                      </p>
+                      <p className='mt-1 text-gray-900'>
                         {order.orderDate
                           ? new Date(order.orderDate).toLocaleDateString()
                           : 'N/A'}
@@ -59,33 +66,40 @@ export default async function Orders() {
                     </div>
                   </div>
 
-                  <div className='flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center'>
-                    <div className='flex items-center'>
-                      <span className='text-sm mr-2'>Status:</span>
+                  {/* Status + Total */}
+                  <div className='mt-6 flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-center'>
+                    <div className='flex items-center gap-2'>
+                      <span className='text-sm text-gray-700 font-medium'>
+                        Status:
+                      </span>
                       <span
-                        className={`px-3 py-1 rounded-full text-sm ${
+                        className={`px-3 py-1 rounded-full text-sm capitalize font-semibold ${
                           order.status === 'paid'
-                            ? 'bg-green-300 text-green-800'
-                            : 'bg-red-300 text-red-800'
+                            ? 'bg-green-100 text-green-700 border border-green-200'
+                            : 'bg-red-100 text-red-700 border border-red-200'
                         }`}
                       >
                         {order.status}
                       </span>
                     </div>
+
                     <div className='sm:text-right'>
-                      <p className='text-sm text-gray-600'>Total Amount:</p>
-                      <p className='font-bold text-lg'>
+                      <p className='text-sm font-semibold text-gray-700'>
+                        Total Amount
+                      </p>
+                      <p className='text-xl font-bold mt-1'>
                         {formatCurrency(order.totalPrice ?? 0, order.currency)}
                       </p>
                     </div>
                   </div>
+
                   {order.amountDiscount ? (
-                    <div className='mt-4 p-3 sm:p-4 bg-red-50 rounded-lg'>
-                      <p className='text-red-600 font-medium text-sm mb-1 sm:text-base'>
+                    <div className='mt-6 p-4 bg-red-50 rounded-lg border border-red-200'>
+                      <p className='text-red-600 font-medium'>
                         Discount Applied:{' '}
                         {formatCurrency(order.amountDiscount, order.currency)}
                       </p>
-                      <p className='text-sm text-gray-600'>
+                      <p className='text-sm text-gray-700 mt-1'>
                         Original Subtotal:{' '}
                         {formatCurrency(
                           (order.totalPrice ?? 0) + order.amountDiscount,
@@ -95,19 +109,22 @@ export default async function Orders() {
                     </div>
                   ) : null}
                 </div>
-                <div className='px-4 py-3 sm:px-6 sm:py-4'>
-                  <p className='text-sm font-semibold text-gray-600 mb-3 sm:mb-4'>
+
+                {/* Order Items */}
+                <div className='p-6'>
+                  <p className='text-sm font-semibold text-gray-700 mb-4'>
                     Order Items
                   </p>
-                  <div className='space-y-3 sm:space-y-4'>
+
+                  <div className='space-y-4'>
                     {order.products?.map((product) => (
                       <div
                         key={product.product?._id}
-                        className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b py-2 last:border-b-0'
+                        className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b pb-4 last:border-none'
                       >
-                        <div className='flex items-center gap-3 sm:gap-4'>
+                        <div className='flex items-center gap-4'>
                           {product.product?.image && (
-                            <div className='relative h-14 w-14 sm:h-18 sm:w-18 shrink-0 rounded-md overflow-hidden'>
+                            <div className='relative h-16 w-16 sm:h-20 sm:w-20 rounded-lg overflow-hidden shadow-sm'>
                               <Image
                                 src={imageUrl(product.product.image).url()}
                                 alt={product.product?.name ?? ''}
@@ -117,15 +134,16 @@ export default async function Orders() {
                             </div>
                           )}
                           <div>
-                            <p className='font-medium text-sm sm:text-base'>
+                            <p className='font-medium text-gray-900'>
                               {product.product?.name}
                             </p>
-                            <p className='text-sm text-gray-800'>
+                            <p className='text-sm text-gray-700 mt-1'>
                               Quantity: {product.quantity ?? 'N/A'}
                             </p>
                           </div>
                         </div>
-                        <p className='text-right font-bold'>
+
+                        <p className='text-right font-semibold text-gray-900'>
                           {product.product?.price && product.quantity
                             ? formatCurrency(
                                 product.product.price * product.quantity,

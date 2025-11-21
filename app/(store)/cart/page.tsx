@@ -41,9 +41,12 @@ export default function Cart() {
   if (groupedItems.length === 0) {
     return (
       <div className='container mx-auto p-4 flex flex-col items-start justify-start h-screen'>
-        <h1 className={`${lobster.className} text-2xl font-bold mb-6 text-gray-800`}>
+        <h1
+          className={`text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
+        >
           My Shopping Cart
         </h1>
+        <hr className='border-t-2 border-[#670626] mb-6' />
         <p className='text-gray-600 text-lg'>Your cart is currently empty</p>
       </div>
     )
@@ -73,9 +76,12 @@ export default function Cart() {
 
   return (
     <div className='container mx-auto p-4 max-w-6xl'>
-      <h1 className={`${lobster.className} text-2xl font-bold mb-6 text-gray-800`}>
+      <h1
+        className={`text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
+      >
         My Shopping Cart
       </h1>
+      <hr className='border-t-2 border-[#670626] mb-6' />
       <div className='flex flex-col lg:flex-row gap-8'>
         <div className='grow'>
           {groupedItems?.map((item) => (

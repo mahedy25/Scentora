@@ -37,19 +37,18 @@ export default function Header() {
   }
 
   const [searchQuery, setSearchQuery] = useState('')
-
-  // Clear the search input when X is clicked
   const clearSearch = () => setSearchQuery('')
 
   return (
     <section className='flex flex-wrap justify-between items-center px-6 py-4 bg-white shadow-md'>
       <Link
         href='/'
-        className={`text-4xl ${lobster.className}  text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide`}
+        className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide`}
       >
         Cube Fashion
       </Link>
 
+      {/* SEARCH BAR */}
       <Form
         action='/search'
         className='w-full sm:w-auto sm:flex-1 sm:mx-6 mt-4 sm:mt-0'
@@ -58,15 +57,15 @@ export default function Header() {
           <input
             type='text'
             name='query'
-            value={searchQuery} // Bind the input value to state
-            onChange={(e) => setSearchQuery(e.target.value)} // Update the state as the user types
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder='Search for products'
-            className='bg-gray-200 text-gray-800 px-5 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#670626] focus:ring-opacity-75 w-full text-lg pr-10'
+            className='bg-gray-200 text-gray-800 px-5 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#670626] w-full text-lg pr-10'
           />
           {searchQuery && (
             <button
               type='button'
-              onClick={clearSearch} // Clear the search when clicked
+              onClick={clearSearch}
               className='cursor-pointer absolute top-1/2 right-3 transform -translate-y-1/2 text-black'
             >
               <XIcon className='w-5 h-5' />
@@ -75,17 +74,20 @@ export default function Header() {
         </div>
       </Form>
 
-      <div className='flex items-center space-x-4 mt-4 sm:mt-0'>
+      {/* RIGHT SIDE — CART / ORDERS / SIGN-IN */}
+      <div className='flex items-center ml-auto space-x-3 sm:space-x-4 mt-4 sm:mt-0 text-sm'>
+        {/* CART */}
         <Link
           href='/cart'
-          className='relative flex justify-center items-center space-x-2 bg-[#D9004C] text-white hover:bg-[#A5003D] font-semibold py-2 px-4 rounded-lg transition-all'
+          className='relative flex justify-center items-center bg-[#D9004C] text-white font-semibold
+          py-1.5 px-2 rounded-md transition-all hover:bg-[#A5003D]
+          text-xs sm:text-sm'
         >
-          <TrolleyIcon className='w-6 h-6' />
-          {/* Item count badge */}
-          <span className='absolute -top-2 -right-4 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs'>
+          <TrolleyIcon className='w-5 h-5 sm:w-6 sm:h-6' />
+          <span className='absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-[10px] sm:text-xs'>
             {itemCount}
           </span>
-          <span className='hidden sm:block'>Cart</span>
+          <span className='hidden sm:block ml-1'>Cart</span>
         </Link>
 
         <ClerkLoaded>
@@ -93,40 +95,34 @@ export default function Header() {
             {user && (
               <Link
                 href='/orders'
-                className='flex justify-center items-center space-x-2 bg-[#D9004C] text-white hover:bg-[#A5003D] font-semibold py-2 px-4 rounded-lg transition-all'
+                className='flex justify-center items-center bg-[#D9004C] text-white font-semibold 
+                py-1.5 px-2 rounded-md transition-all hover:bg-[#A5003D]
+                text-xs sm:text-sm'
               >
-                <PackageIcon className='w-6 h-6' />
-                <span className='hidden sm:block'>Orders</span>
+                <PackageIcon className='w-5 h-5 sm:w-6 sm:h-6' />
+                <span className='hidden sm:block ml-1'>Orders</span>
               </Link>
             )}
           </SignedIn>
 
+          {/* USER BUTTON OR SIGN-IN */}
           {user ? (
-            <div className='flex items-center space-x-2'>
-              <div className='w-8 h-8 rounded-full border-2 border-[#670626]'>
+            <div className='flex items-center space-x-1 sm:space-x-2'>
+              <div className='w-7 h-7 sm:w-8 sm:h-8 rounded-full  overflow-hidden'>
                 <UserButton />
-              </div>
-
-              <div className='hidden sm:flex flex-col items-start'>
-                <p className='text-xs text-[#670626] font-medium'>
-                  Welcome Back
-                </p>
-                <p className='text-sm font-semibold'>
-                  {user.fullName ?? user.username}
-                </p>
               </div>
             </div>
           ) : (
-            <div className='py-1 px-3 text-sm bg-[#D9004C] text-white rounded-full hover:bg-[#A5003D] transition-all'>
+            <div className='py-1.5 px-3 text-xs sm:text-sm bg-[#D9004C] text-white rounded-full hover:bg-[#A5003D] transition-all'>
               <SignInButton mode='modal' />
             </div>
           )}
 
-          {/* Passkey button for users without passkeys */}
+          {/* PASSKEY BUTTON */}
           {user?.passkeys.length === 0 && (
             <Button
               onClick={createClerkPasskey}
-              className='text-sm py-1.5 px-3 bg-[#D9004C] text-white rounded-full mt-3 sm:mt-0 hover:bg-[#A5003D]'
+              className='hidden lg:block text-xs py-1.5 px-3 bg-[#D9004C] text-white rounded-full hover:bg-[#A5003D]'
             >
               Create passkey
             </Button>
