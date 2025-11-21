@@ -1,4 +1,6 @@
 
+import Categories from "@/components/sections/Categories";
+import NewlyAddedProducts from "@/components/sections/NewlyAddedProducts";
 import SaleBanner from "@/components/sections/SaleBanner";
 
 
@@ -10,6 +12,8 @@ export default async function Home() {
   return (
     <div className='px-2 mt-4 md:px-6 xl:px-10'>
       <SaleBanner />
+      <Categories/>
+      <NewlyAddedProducts  />
     </div>
   )
 }

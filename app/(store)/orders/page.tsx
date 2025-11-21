@@ -21,15 +21,19 @@ export default async function Orders() {
   const orders = await getMyOrders(userId)
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-linear-to-b from-gray-100 to-gray-200'>
-      <div className='bg-white p-6 sm:p-8 rounded-xl shadow-xl w-full max-w-5xl backdrop-blur'>
+    <div className='flex flex-col items-center justify-start min-h-screen '>
+      <div className='p-6 sm:p-8 rounded-xl  w-full max-w-5xl backdrop-blur'>
         <h1
-          className={`text-5xl ${lobster.className} text-[#670626] text-center tracking-wide mb-6`}
+          className={`text-2xl sm:text-3xl md:text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
         >
           My Orders
         </h1>
 
-        <hr className='border-t-2 border-[#670626] mb-8 opacity-60' />
+        {/* ✨ Modern Gradient Divider */}
+        <div className='relative w-32 h-1 mx-auto mb-8'>
+          <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full'></div>
+          <div className='absolute inset-0 blur-md bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-60'></div>
+        </div>
 
         {orders.length === 0 ? (
           <div className='text-center text-gray-600 py-12'>

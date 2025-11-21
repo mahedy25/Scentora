@@ -4,12 +4,7 @@ import { getProductBySlug } from '@/sanity/lib/products/getProductBySlug'
 import { PortableText } from 'next-sanity'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { Lobster } from 'next/font/google'
 
-const lobster = Lobster({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 export const dynamic = 'force-static'
 export const revalidate = 60
@@ -60,7 +55,7 @@ export default async function Product({
         <div className='flex flex-col justify-between'>
           <div>
             <h1
-              className={`${lobster.className} text-4xl sm:text-5xl font-extrabold text-[#670626] mb-4`}
+              className={` text-4xl sm:text-5xl font-bold text-[#670626] mb-4`}
             >
               {product.name}
             </h1>

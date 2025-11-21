@@ -40,13 +40,18 @@ export default function Cart() {
 
   if (groupedItems.length === 0) {
     return (
-      <div className='container mx-auto p-4 flex flex-col items-start justify-start h-screen'>
+      <div className='container mx-auto p-4 flex flex-col items-center justify-start h-screen'>
         <h1
-          className={`text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
+          className={`text-2xl sm:text-3xl md:text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90  cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
         >
           My Shopping Cart
         </h1>
-        <hr className='border-t-2 border-[#670626] mb-6' />
+
+        {/* ✨ Modern Gradient Divider */}
+        <div className='relative w-32 h-1 mx-auto mb-8'>
+          <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full'></div>
+          <div className='absolute inset-0 blur-md bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-60'></div>
+        </div>
         <p className='text-gray-600 text-lg'>Your cart is currently empty</p>
       </div>
     )
@@ -77,11 +82,16 @@ export default function Cart() {
   return (
     <div className='container mx-auto p-4 max-w-6xl'>
       <h1
-        className={`text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
+        className={`text-2xl sm:text-3xl md:text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
       >
         My Shopping Cart
       </h1>
-      <hr className='border-t-2 border-[#670626] mb-6' />
+
+      {/* ✨ Modern Gradient Divider */}
+      <div className='relative w-32 h-1 mx-auto mb-8'>
+        <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full'></div>
+        <div className='absolute inset-0 blur-md bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-60'></div>
+      </div>
       <div className='flex flex-col lg:flex-row gap-8'>
         <div className='grow'>
           {groupedItems?.map((item) => (
