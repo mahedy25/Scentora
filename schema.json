@@ -827,6 +827,13 @@
         },
         "optional": true
       },
+      "discountPrice": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "categories": {
         "type": "objectAttribute",
         "value": {

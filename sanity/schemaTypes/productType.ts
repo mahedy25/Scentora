@@ -43,6 +43,36 @@ export const productType = defineType({
       validation: (Rule) => Rule.min(0).required(),
     }),
 
+
+        // NEW: Optional Discount Price (must be less than price if present)
+    defineField({
+  name: "discountPrice",
+  title: "Discount Price",
+  type: "number",
+  description: "Optional. Enter a lower price when the product is on sale.",
+  validation: (Rule) =>
+    Rule.custom((value, context) => {
+      const price = context?.document?.price;
+
+      // Nothing entered → valid (field is optional)
+      if (value === undefined || value === null) return true;
+
+      // Must be a number
+      if (typeof value !== "number") {
+        return "Discount price must be a number";
+      }
+
+      // Must be less than original price
+      if (typeof price === "number" && value >= price) {
+        return "Discount price must be LESS than the regular price";
+      }
+
+      return true;
+    }),
+}),
+
+
+
     // Categories
     defineField({
       name: "categories",
