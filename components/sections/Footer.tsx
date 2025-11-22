@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
+import { NewsletterForm } from '../NewsletterForm'
 
 export default function Footer() {
   return (
@@ -100,20 +101,7 @@ export default function Footer() {
               Be the first to hear about new products and exclusive offers.
             </p>
 
-            <form className='flex items-center'>
-              <input
-                type='email'
-                placeholder='Enter your email'
-                className='px-4 py-2 w-full rounded-l-md bg-gray-800 text-gray-200 border border-gray-700 
-                focus:outline-none focus:border-[#D9004C]'
-              />
-              <button
-                type='submit'
-                className='px-4 py-2 bg-[#D9004C] hover:bg-[#A5003D] text-white font-semibold rounded-r-md transition'
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 

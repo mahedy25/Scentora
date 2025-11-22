@@ -13,6 +13,17 @@
  */
 
 // Source: schema.json
+export type Newsletter = {
+  _id: string;
+  _type: "newsletter";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  email?: string;
+  subscribedAt?: string;
+};
+
 export type Navigation = {
   _id: string;
   _type: "navigation";
@@ -264,7 +275,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Navigation | Sale | Order | Category | Slug | BlockContent | Product | SanityImageCrop | SanityImageHotspot | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Newsletter | Navigation | Sale | Order | Category | Slug | BlockContent | Product | SanityImageCrop | SanityImageHotspot | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/orders/getMyOrders.tsx
 // Variable: MY_ORDERS_QUERY
