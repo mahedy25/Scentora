@@ -88,8 +88,6 @@ export type Order = {
       [internalGroqTypeReferenceTo]?: "product";
     };
     quantity?: number;
-    selectedColor?: string;
-    selectedSize?: string;
     _key: string;
   }>;
   totalPrice?: number;
@@ -178,16 +176,6 @@ export type Product = {
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-  colors?: Array<{
-    color?: string;
-    available?: boolean;
-    _key: string;
-  }>;
-  sizes?: Array<{
-    size?: string;
-    available?: boolean;
-    _key: string;
-  }>;
 };
 
 export type SanityImageCrop = {
@@ -352,20 +340,8 @@ export type MY_ORDERS_QUERYResult = Array<{
         [internalGroqTypeReferenceTo]?: "category";
       }>;
       stock?: number;
-      colors?: Array<{
-        color?: string;
-        available?: boolean;
-        _key: string;
-      }>;
-      sizes?: Array<{
-        size?: string;
-        available?: boolean;
-        _key: string;
-      }>;
     } | null;
     quantity?: number;
-    selectedColor?: string;
-    selectedSize?: string;
     _key: string;
   }> | null;
   totalPrice?: number;
@@ -423,16 +399,6 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-  colors?: Array<{
-    color?: string;
-    available?: boolean;
-    _key: string;
-  }>;
-  sizes?: Array<{
-    size?: string;
-    available?: boolean;
-    _key: string;
-  }>;
 }>;
 
 // Source: ./sanity/lib/products/getLatestProducts.ts
@@ -469,16 +435,6 @@ export type LATEST_PRODUCTS_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-  colors?: Array<{
-    color?: string;
-    available?: boolean;
-    _key: string;
-  }>;
-  sizes?: Array<{
-    size?: string;
-    available?: boolean;
-    _key: string;
-  }>;
 }>;
 
 // Source: ./sanity/lib/products/getOnSaleProducts.ts
@@ -515,16 +471,6 @@ export type ON_SALE_PRODUCTS_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-  colors?: Array<{
-    color?: string;
-    available?: boolean;
-    _key: string;
-  }>;
-  sizes?: Array<{
-    size?: string;
-    available?: boolean;
-    _key: string;
-  }>;
 }>;
 
 // Source: ./sanity/lib/products/getProductBySlug.ts
@@ -561,16 +507,6 @@ export type PRODUCT_BY_ID_QUERYResult = {
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-  colors?: Array<{
-    color?: string;
-    available?: boolean;
-    _key: string;
-  }>;
-  sizes?: Array<{
-    size?: string;
-    available?: boolean;
-    _key: string;
-  }>;
 } | null;
 
 // Source: ./sanity/lib/products/getProductsByCategory.ts
@@ -607,16 +543,6 @@ export type PRODUCTS_BY_CATEGORY_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-  colors?: Array<{
-    color?: string;
-    available?: boolean;
-    _key: string;
-  }>;
-  sizes?: Array<{
-    size?: string;
-    available?: boolean;
-    _key: string;
-  }>;
 }>;
 
 // Source: ./sanity/lib/products/searchPruductsByName.ts
@@ -653,16 +579,6 @@ export type PRODUCT_SEARCH_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-  colors?: Array<{
-    color?: string;
-    available?: boolean;
-    _key: string;
-  }>;
-  sizes?: Array<{
-    size?: string;
-    available?: boolean;
-    _key: string;
-  }>;
 }>;
 
 // Source: ./sanity/lib/sales/getActiveSaleByCouponCode.ts

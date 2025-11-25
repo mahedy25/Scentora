@@ -77,19 +77,6 @@ export const orderType = defineType({
               type: "number",
               validation: (Rule) => Rule.required().min(1),
             }),
-
-            // SELECTED OPTIONS SAVED HERE
-            defineField({
-              name: "selectedColor",
-              title: "Selected Color",
-              type: "string",
-            }),
-
-            defineField({
-              name: "selectedSize",
-              title: "Selected Size",
-              type: "string",
-            }),
           ],
 
           preview: {
@@ -98,16 +85,11 @@ export const orderType = defineType({
               quantity: "quantity",
               image: "product.image",
               price: "product.price",
-              selectedColor: "selectedColor",
-              selectedSize: "selectedSize",
             },
-            prepare({ product, quantity, price, selectedColor, selectedSize, image }) {
-              const color = selectedColor ? ` • ${selectedColor}` : "";
-              const size = selectedSize ? ` • ${selectedSize}` : "";
-
+            prepare({ product, quantity, price, image }) {
               return {
                 title: `${product} x ${quantity}`,
-                subtitle: `${price}${color}${size}`,
+                subtitle: `${price}`,
                 media: image,
               };
             },
