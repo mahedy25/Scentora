@@ -83,7 +83,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
       <button
         onClick={submitReview}
         disabled={loading}
-        className='bg-[#670626] text-white px-5 py-2 rounded-lg'
+        className='bg-[#670626] cursor-pointer text-white px-5 py-2 rounded-lg'
       >
         {loading ? 'Posting...' : 'Submit Review'}
       </button>
