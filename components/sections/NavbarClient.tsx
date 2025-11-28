@@ -96,7 +96,7 @@ function DockTooltip({
     <div
       className={`${cinzel.className}
         absolute font-semibold px-3 py-1.5 rounded-xl backdrop-blur-xl
-        bg-black/85 text-white tracking-wide
+        bg-[#670626] text-white 
         border border-white/10 shadow-2xl whitespace-nowrap
         opacity-0 scale-90 group-hover:opacity-100 
         group-hover:scale-100 transition-all duration-300
@@ -111,7 +111,7 @@ function DockTooltip({
 
       <div
         className={`
-          absolute w-2 h-2 rotate-45 bg-black
+          absolute w-2 h-2 rotate-45 bg-[#670626]
           border border-white/10
           ${
             isHorizontal
@@ -142,7 +142,7 @@ function DockIcon({
     bg-white backdrop-blur-xl
     border border-[#ff0055]/20
     hover:border-[#ff0055]/40
-    hover:bg-black/60 
+    hover:bg-white 
     hover:scale-125 hover:-translate-y-2
     shadow-[0_0_18px_rgba(255,0,90,0.2)]
     transition-all duration-300

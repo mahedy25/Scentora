@@ -92,7 +92,7 @@ export default function Success() {
           variant='outline'
           className='border-[#670626] text-[#670626] hover:bg-[#f8e7eb] px-8 py-3 rounded-md'
         >
-          <Link href='/'>Continue Shopping</Link>
+          <Link href='/all-products'>Continue Shopping</Link>
         </Button>
       </div>
     </div>
