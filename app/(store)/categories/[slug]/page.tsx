@@ -1,10 +1,10 @@
 import ProductsView from '@/components/sections/ProductsView'
 import { getAllCategories } from '@/sanity/lib/products/getAllCategories'
 import { getProductsByCategory } from '@/sanity/lib/products/getProductsByCategory'
-import { Lobster } from 'next/font/google'
+import { Cinzel } from 'next/font/google'
 
-const lobster = Lobster({
-  weight: '400',
+const cinzel = Cinzel({
+  weight: ['400', '600', '700'],
   subsets: ['latin'],
 })
 
@@ -14,6 +14,7 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+
   const products = await getProductsByCategory(slug)
   const categories = await getAllCategories()
 
@@ -23,22 +24,31 @@ export default async function CategoryPage({
     .join(' ')
 
   return (
-    <div className='flex flex-col items-center justify-top min-h-screen  p-4'>
-      <div className=' p-8 rounded-lg w-full'>
-        {/* Headline with Lobster font */}
+    <div className='flex flex-col items-center min-h-screen px-4 py-10'>
+      <div className='w-full  mx-auto'>
+        {/* Category Title */}
         <h1
-          className={`text-2xl sm:text-3xl md:text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
+          className={`
+    ${cinzel.className}
+    text-center
+    text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+    text-[#670626]
+    tracking-wide
+  `}
         >
           {title} Collection
         </h1>
 
         {/* Gradient Divider */}
-        <div className='relative w-32 h-1 mx-auto mb-8'>
-          <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full'></div>
-          <div className='absolute inset-0 blur-md bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-60'></div>
+        <div className='relative w-40 h-1 mx-auto mt-4 mb-10'>
+          <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full' />
+          <div className='absolute inset-0 blur-xl bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-40 rounded-full' />
         </div>
 
-        <ProductsView products={products} categories={categories} />
+        {/* Products */}
+        <div className='w-full mx-auto max-w-7xl'>
+          <ProductsView products={products} categories={categories} />
+        </div>
       </div>
     </div>
   )

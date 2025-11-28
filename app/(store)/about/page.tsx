@@ -23,7 +23,7 @@ export default function AboutUs() {
         <h1
           className={`text-3xl sm:text-4xl md:text-5xl ${cinzel.className} text-[#670626] tracking-wide`}
         >
-          Scentora — The Art of Fragrance
+          Scentora — Your Destination for Premium Fragrances
         </h1>
 
         <div className='relative w-40 h-1 mx-auto mt-4 mb-8'>
@@ -32,9 +32,10 @@ export default function AboutUs() {
         </div>
 
         <p className='max-w-2xl mx-auto text-[#4b1730] text-base sm:text-lg leading-relaxed'>
-          At Scentora we craft more than perfumes — we compose moments. Each
-          bottle is designed to capture emotion, memory and elegance using the
-          finest ingredients from around the world.
+          Scentora is a modern fragrance retailer offering a curated selection
+          of authentic perfumes from trusted brands. We focus on quality,
+          originality, and a premium shopping experience for every fragrance
+          lover.
         </p>
       </header>
 
@@ -45,24 +46,23 @@ export default function AboutUs() {
           <h2
             className={`${cinzel.className} text-2xl sm:text-3xl text-[#670626] font-semibold mb-4`}
           >
-            Crafted, Not Manufactured
+            Curated with Care
           </h2>
           <p className='text-[#5a2336] leading-relaxed mb-4'>
-            Every scent in the Scentora collection is curated by master
-            perfumers who blend tradition with innovation. We source rare
-            botanicals, precious resins and premium absolutes, then compose them
-            into harmonies that evolve beautifully on the skin.
+            Every fragrance in our collection is selected for its authenticity,
+            quality, and reputation. We partner with verified distributors to
+            ensure every bottle you receive is original and stored properly.
           </p>
 
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6'>
             <Feature
-              title='Fine Ingredients'
-              text='Sustainably sourced ingredients chosen for purity and character.'
+              title='Authentic Products'
+              text='All perfumes are sourced from reliable and verified suppliers.'
               icon={<Droplet className='w-6 h-6 text-[#D9004C]' />}
             />
             <Feature
-              title='Slow Crafted'
-              text='Small-batch blending and careful maturation for lasting depth.'
+              title='Premium Selection'
+              text='We choose fragrances that are trusted, long lasting, and well-loved.'
               icon={<Sparkles className='w-6 h-6 text-[#D9004C]' />}
             />
           </div>
@@ -72,7 +72,7 @@ export default function AboutUs() {
         <div className='relative w-full h-72 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-lg border border-[#670626]/10'>
           <Image
             src='/images/Dior Sauvage-4.jpg'
-            alt='Bottle of Scentora perfume with floral arrangement'
+            alt='Premium perfume presentation'
             fill
             className='object-cover'
             priority
@@ -85,34 +85,34 @@ export default function AboutUs() {
         <h3
           className={`${cinzel.className} text-2xl text-[#670626] font-semibold text-center mb-8`}
         >
-          Our Promise
+          Our Commitment
         </h3>
 
         <div className='grid gap-6 md:grid-cols-3'>
           <Card
-            title='Quality & Transparency'
-            desc='We disclose key notes and production methods — so you know exactly what you wear.'
+            title='100% Authenticity'
+            desc='We guarantee all fragrances are original and sourced responsibly.'
             icon={<ShieldCheck className='w-10 h-10 text-[#D9004C]' />}
           />
           <Card
-            title='Ethical Sourcing'
-            desc='We partner with growers and cooperatives who share sustainable practices.'
+            title='Trusted Sourcing'
+            desc='We work only with certified distributors and reliable suppliers.'
             icon={<BadgeCheck className='w-10 h-10 text-[#D9004C]' />}
           />
           <Card
-            title='Designed to Last'
-            desc='Concentrated formulas for a refined, enduring scent experience.'
+            title='Premium Experience'
+            desc='From packaging to delivery, every detail is handled with care.'
             icon={<Star className='w-10 h-10 text-[#D9004C]' />}
           />
         </div>
       </section>
 
-      {/* How We Create — timeline-like */}
+      {/* Process (Adjusted for Retailer) */}
       <section className='mt-16 bg-white border border-[#670626]/10 rounded-2xl p-8 shadow-sm'>
         <h4
           className={`${cinzel.className} text-xl text-[#670626] font-semibold mb-6`}
         >
-          How a Scentora Fragrance Is Born
+          How Scentora Works
         </h4>
 
         <ol className='space-y-6'>
@@ -121,11 +121,9 @@ export default function AboutUs() {
               <span className='font-semibold text-[#670626]'>1</span>
             </div>
             <div>
-              <p className='font-medium text-[#4b1730]'>
-                Inspiration & Concept
-              </p>
+              <p className='font-medium text-[#4b1730]'>Product Selection</p>
               <p className='text-sm text-[#5a2336]'>
-                An idea, memory or feeling sets the palette.
+                We choose bestselling, reputable, and in-demand fragrances.
               </p>
             </div>
           </li>
@@ -135,9 +133,10 @@ export default function AboutUs() {
               <span className='font-semibold text-[#670626]'>2</span>
             </div>
             <div>
-              <p className='font-medium text-[#4b1730]'>Material Selection</p>
+              <p className='font-medium text-[#4b1730]'>Verified Procurement</p>
               <p className='text-sm text-[#5a2336]'>
-                Only select absolutes, essences and isolates are considered.
+                All stock is acquired through trusted distributors to ensure
+                authenticity.
               </p>
             </div>
           </li>
@@ -147,17 +146,16 @@ export default function AboutUs() {
               <span className='font-semibold text-[#670626]'>3</span>
             </div>
             <div>
-              <p className='font-medium text-[#4b1730]'>Compose & Mature</p>
+              <p className='font-medium text-[#4b1730]'>Secure Packaging</p>
               <p className='text-sm text-[#5a2336]'>
-                Blends age, are refined, and tested until perfect balance is
-                achieved.
+                Perfumes are stored carefully and shipped with full protection.
               </p>
             </div>
           </li>
         </ol>
       </section>
 
-      {/* Benefits / Why Customers Love Scentora */}
+      {/* Benefits */}
       <section className='mt-16'>
         <h3
           className={`${cinzel.className} text-2xl text-[#670626] font-semibold text-center mb-8`}
@@ -168,19 +166,19 @@ export default function AboutUs() {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <MiniCard
             icon={<Truck className='w-5 h-5 text-[#D9004C]' />}
-            text='Fast & secure worldwide shipping'
+            text='Fast and secure delivery'
           />
           <MiniCard
             icon={<Heart className='w-5 h-5 text-[#D9004C]' />}
-            text='Loved by fragrance connoisseurs'
+            text='Trusted by thousands of customers'
           />
           <MiniCard
             icon={<BadgeCheck className='w-5 h-5 text-[#D9004C]' />}
-            text='Premium, responsibly-sourced materials'
+            text='Authenticity guaranteed'
           />
           <MiniCard
             icon={<Sparkles className='w-5 h-5 text-[#D9004C]' />}
-            text='Distinct compositions that evolve beautifully'
+            text='Carefully curated premium fragrances'
           />
         </div>
       </section>
@@ -196,16 +194,16 @@ export default function AboutUs() {
         <div className='space-y-4 max-w-3xl mx-auto'>
           {[
             {
+              q: 'Are your perfumes authentic?',
+              a: 'Yes. All fragrances sold by Scentora are 100% original and sourced from verified suppliers.',
+            },
+            {
               q: 'How long does shipping take?',
-              a: 'Most orders arrive within 3–7 business days depending on destination and shipping method.',
+              a: 'Orders typically arrive within 3–7 business days depending on location.',
             },
             {
               q: 'Can I return a fragrance?',
-              a: 'Yes. Unopened bottles can be returned within 14 days; consult our returns policy for details.',
-            },
-            {
-              q: 'Are your fragrances concentrated?',
-              a: 'Our formulations are concentrated for longevity — described on each product as Eau de Parfum or Parfum where applicable.',
+              a: 'Unopened bottles can be returned within 14 days according to our return policy.',
             },
           ].map((faq) => (
             <details
@@ -224,23 +222,19 @@ export default function AboutUs() {
       {/* CTA */}
       <footer className='mt-16 text-center'>
         <p className='text-[#4b1730] mb-4'>
-          Discover our collections and find a scent that tells your story.
+          Explore our curated collections and discover your next signature
+          scent.
         </p>
         <a
-          href='/shop'
-          className='inline-block px-6 py-3 rounded-md bg-[#670626] text-white hover:bg-[#D9004C] transition'
+          href='/all-products'
+          className='inline-block px-6 py-3 rounded-md bg-black font-semibold text-white hover:bg-[#D9004C] transition'
         >
-          Explore Collections
+          Browse Collections
         </a>
       </footer>
     </section>
   )
 }
-
-/* -------------------------
-   Small presentational components
-   (kept inside same file for convenience)
-   ------------------------- */
 
 function Feature({
   title,

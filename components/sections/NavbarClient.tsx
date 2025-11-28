@@ -44,16 +44,21 @@ export function NavbarClient({ navItems }: NavbarClientProps) {
   return (
     <>
       {/* Floating Dock */}
-      <div className='fixed z-9999 transition-all duration-300 pointer-events-none group/dock bottom-0 left-1/2 -translate-x-1/2 md:-translate-y-1/2'>
+      <div
+        className='fixed bottom-0 left-1/2 -translate-x-1/2 md:-translate-y-1/2 
+        z-9999 pointer-events-none group/dock transition-all duration-300'
+      >
         <div
-          className='flex items-center gap-2 px-3 py-2.5 rounded-xl md:rounded-2xl 
-          bg-white/20 dark:bg-black/30 
-          hover:bg-white/30 dark:hover:bg-black/40 
-          backdrop-blur-2xl border border-white/30 dark:border-white/20 
-          hover:border-white/40 dark:hover:border-white/30 
-          shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] 
-          dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.45)] 
-          pointer-events-auto transition-all duration-300'
+          className='
+            flex items-center gap-2 px-3 py-2.5 rounded-xl md:rounded-2xl
+            bg-white/70 dark:bg-[#1f1f1f]/70
+            backdrop-blur-xl
+            border border-white/60 dark:border-white/10
+            shadow-[0_8px_32px_rgba(0,0,0,0.25)]
+            dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)]
+            hover:bg-white/80 dark:hover:bg-[#2a2a2a]/80
+            pointer-events-auto transition-all duration-300
+          '
         >
           {mobile.visible.map((item) => (
             <DockIcon
@@ -69,42 +74,46 @@ export function NavbarClient({ navItems }: NavbarClientProps) {
 }
 
 /* Tooltip */
-const DockTooltip = ({
+function DockTooltip({
   direction,
   title,
 }: {
   direction: 'vertical' | 'horizontal'
   title: string
-}) => {
+}) {
   const isHorizontal = direction === 'horizontal'
 
   return (
     <div
-      className={`absolute px-3 py-1.5 ${
-        isHorizontal ? 'rounded-xl' : 'rounded-lg'
-      } bg-white/90 dark:bg-black/90 backdrop-blur-xl 
-      border border-white/40 dark:border-white/20 
-      ${isHorizontal ? 'text-xs md:text-sm' : 'text-sm'}
-      font-medium text-neutral-800 dark:text-neutral-200 
-      whitespace-nowrap opacity-0 scale-90 
-      group-hover:opacity-100 group-hover:scale-100 
-      transition-all duration-300 pointer-events-none 
-      shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]
-      ${
-        isHorizontal
-          ? '-top-9 md:-top-12 left-1/2 -translate-x-1/2 group-hover:-translate-y-2'
-          : 'right-14 top-1/2 -translate-y-1/2 group-hover:-translate-x-1'
-      }`}
-    >
-      {title}
-      <div
-        className={`absolute w-2 h-2 rotate-45 bg-white/90 dark:bg-black/90 
+      className={`
+        absolute px-3 py-1.5 rounded-xl backdrop-blur-xl
+        bg-white dark:bg-[#111]
+        text-neutral-900 dark:text-neutral-200
+        border border-black/10 dark:border-white/10
+        shadow-xl whitespace-nowrap
+        opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100
+        transition-all duration-300
         ${
           isHorizontal
-            ? '-bottom-1 left-1/2 -translate-x-1/2 border-r border-b'
-            : '-right-1 top-1/2 -translate-y-1/2 border-r border-t'
-        } border-white/40 dark:border-white/20`}
-      />
+            ? '-top-10 left-1/2 -translate-x-1/2'
+            : 'right-14 top-1/2 -translate-y-1/2'
+        }
+      `}
+    >
+      {title}
+
+      <div
+        className={`
+          absolute w-2 h-2 rotate-45 
+          bg-white dark:bg-[#111]
+          border border-black/10 dark:border-white/10
+          ${
+            isHorizontal
+              ? '-bottom-1 left-1/2 -translate-x-1/2'
+              : '-right-1 top-1/2 -translate-y-1/2'
+          }
+        `}
+      ></div>
     </div>
   )
 }
@@ -123,25 +132,23 @@ function DockIcon({
     'relative flex items-center justify-center w-full h-full rounded-full backdrop-blur-xl transition-all'
 
   const verticalIconClasses = `
-    ${baseIconClasses} 
-    bg-white/40 dark:bg-white/20 
-    border border-white/50 dark:border-white/30 
-    duration-300 hover:scale-110 
-    hover:bg-white/50 dark:hover:bg-white/30 
+    ${baseIconClasses}
+    bg-white/40 dark:bg-white/20
+    border border-white/50 dark:border-white/30
+    hover:scale-110
+    hover:bg-white/50 dark:hover:bg-white/30
     hover:border-white/70 dark:hover:border-white/40
+    duration-300
   `
 
   const horizontalIconClasses = `
-    ${baseIconClasses} 
-    bg-white/10 dark:bg-white/5 
-    group-hover/dock:bg-white/40 dark:group-hover/dock:bg-white/20 
-    border border-white/20 dark:border-white/10 
-    group-hover/dock:border-white/50 dark:group-hover/dock:border-white/30 
-    duration-500 ease-out 
-    hover:scale-125 hover:-translate-y-2 md:hover:-translate-y-3 
-    hover:!bg-white/50 dark:hover:!bg-white/30 
-    hover:!border-white/70 dark:hover:!border-white/40 
-    hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]
+    ${baseIconClasses}
+    bg-black/5 dark:bg-white/10
+    border border-black/10 dark:border-white/20
+    group-hover/dock:bg-black/10 dark:group-hover/dock:bg-white/20
+    group-hover/dock:border-black/20 dark:group-hover/dock:border-white/40
+    hover:scale-125 hover:-translate-y-2 md:hover:-translate-y-3
+    transition-all duration-300
   `
 
   const handleClick = (e?: React.MouseEvent) => {
@@ -156,11 +163,12 @@ function DockIcon({
     <>
       <div className={isVertical ? verticalIconClasses : horizontalIconClasses}>
         <div
-          className={`w-6 h-6 md:w-6 md:h-6 ${
-            isVertical
-              ? 'text-neutral-500 dark:text-neutral-300'
-              : 'text-neutral-400/60 group-hover/dock:text-neutral-600 dark:text-neutral-300/60 dark:group-hover/dock:text-neutral-200 transition-colors duration-300'
-          }`}
+          className={`
+            w-6 h-6 md:w-6 md:h-6
+            text-neutral-700 dark:text-neutral-200
+            group-hover/dock:text-neutral-900 dark:group-hover/dock:text-white
+            transition-colors duration-300
+          `}
         >
           {item.icon}
         </div>
@@ -174,7 +182,7 @@ function DockIcon({
   )
 
   const wrapperClasses =
-    'group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12 rounded-full bg-white/0'
+    'group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12 rounded-full'
 
   return item.onClick ? (
     <button type='button' onClick={handleClick} className={wrapperClasses}>

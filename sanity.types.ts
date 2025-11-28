@@ -26,9 +26,9 @@ export type Review = {
     [internalGroqTypeReferenceTo]?: "product";
   };
   userName?: string;
-  title?: string;
   comment?: string;
   rating?: number;
+  createdAt?: string;
 };
 
 export type Contact = {
@@ -462,7 +462,7 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
   reviews: Array<{
     rating: number | null;
     userName: string | null;
-    title: string | null;
+    title: null;
     comment: string | null;
   }>;
 }>;
@@ -618,7 +618,7 @@ export type PRODUCT_BY_SLUG_QUERYResult = {
   reviews: Array<{
     rating: number | null;
     userName: string | null;
-    title: string | null;
+    title: null;
     comment: string | null;
   }>;
 } | null;

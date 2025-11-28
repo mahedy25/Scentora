@@ -131,8 +131,8 @@ export default function Footer() {
         </div>
 
         {/* COPYRIGHT */}
-        <div className='pt-6 text-center text-sm text-gray-500 mb-20'>
-          © {new Date().getFullYear()} Scentora — The Art of Fragrance.
+        <div className='pt-6 text-center text-sm text-[#ffffff] mb-20'>
+          © {new Date().getFullYear()} Scentora — Created By {' Mahedy Hasan '}
         </div>
       </div>
     </footer>

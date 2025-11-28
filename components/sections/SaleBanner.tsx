@@ -17,27 +17,35 @@ export default async function SaleBanner() {
   return (
     <div
       className='
-        bg-linear-to-br from-[#D9004C] via-[#7A002A] to-black
-        text-white rounded-2xl shadow-2xl
-        px-8 py-14 sm:px-12 lg:px-20
+        relative overflow-hidden rounded-3xl 
+        bg-linear-to-br from-[#B3003C] via-[#5A001D] to-black
+        px-6 sm:px-10 md:px-16 lg:px-24 
+        py-12 sm:py-16 lg:py-20
         border border-white/10
       '
     >
+      {/* Soft Glows */}
+      <div className='absolute -top-24 -right-20 w-72 h-72 bg-[#FF006A]/25 blur-[120px] rounded-full'></div>
+      <div className='absolute -bottom-24 -left-20 w-72 h-72 bg-[#FF006A]/15 blur-[120px] rounded-full'></div>
+
       <div
         className='
           grid 
-          grid-cols-1 md:grid-cols-2 
-          gap-12 md:gap-20
+          grid-cols-1 lg:grid-cols-2
+          gap-14 lg:gap-24
           items-center
+          relative z-10
+          max-w-7xl mx-auto
         '
       >
-        {/* LEFT — HEADLINE + DESCRIPTION */}
-        <div className='space-y-6 lg:space-y-8'>
+        {/* LEFT CONTENT */}
+        <div className='space-y-6 text-center lg:text-left'>
           <h2
             className={`
-              text-4xl sm:text-5xl lg:text-6xl 
+              text-3xl sm:text-4xl md:text-5xl lg:text-6xl 
               font-bold leading-tight tracking-tight
               ${cinzel.className}
+              text-white
             `}
           >
             {sale.title}
@@ -45,56 +53,60 @@ export default async function SaleBanner() {
 
           <p
             className='
-              text-lg sm:text-xl lg:text-2xl
+              text-base sm:text-lg md:text-xl
               text-white/85 leading-relaxed 
-              max-w-xl
+              max-w-xl mx-auto lg:mx-0
             '
           >
             {sale.description}
           </p>
         </div>
 
-        {/* RIGHT — COUPON CARD */}
-        <div className='flex md:justify-end'>
+        {/* RIGHT — RESPONSIVE COUPON CARD */}
+        <div className='flex justify-center lg:justify-end w-full'>
           <div
             className='
               bg-white/10 backdrop-blur-2xl
-              px-8 py-7 rounded-2xl
+              px-8 sm:px-10 md:px-12 
+              py-10 sm:py-12 
+              rounded-3xl
               border border-white/20
-              shadow-xl 
-              w-full sm:w-auto
-              space-y-4
-              text-center md:text-left
+              shadow-[0_0_30px_rgba(255,255,255,0.15)]
+              w-full max-w-sm
+              flex flex-col items-center
+              space-y-8
+              text-center
             '
           >
-            <p className='text-sm sm:text-base uppercase tracking-wide text-white/70'>
-              Use Code
+            <p className='text-xs sm:text-sm uppercase tracking-[0.25em] text-white/70'>
+              Limited Time Offer
             </p>
 
+            {/* Divider */}
+            <div className='w-16 border-t border-white/30 mx-auto'></div>
+
+            {/* COUPON BOX */}
             <span
               className='
                 bg-white text-black 
-                px-8 py-3 rounded-md 
-                text-xl sm:text-2xl 
-                font-bold tracking-widest 
-                inline-block shadow-md
+                px-10 sm:px-12 py-4
+                rounded-xl
+                text-2xl sm:text-3xl font-bold
+                tracking-[0.35em]
+                shadow-[0_0_25px_rgba(255,255,255,0.2)]
               '
             >
               {sale.couponCode}
             </span>
 
-            <p className='text-sm sm:text-base text-white/75'>
-              {sale.discountAmount}% off orders over{' '}
-              <span className='font-semibold'>$30</span>
-            </p>
-
-            <Link href='/all-products'>
+            <Link href='/all-products' className='w-full'>
               <Button
                 className='
-                  mt-2 py-3 px-10
-                  text-base sm:text-lg 
+                  w-full py-4 sm:py-5
+                  text-base sm:text-lg
                   font-semibold uppercase 
-                  tracking-wide w-full md:w-auto
+                  tracking-wide
+                  rounded-xl
                 '
               >
                 Shop Now

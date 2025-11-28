@@ -32,7 +32,7 @@ export default async function OnSaleProducts() {
           No products on sale right now.
         </p>
       ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6'>
+        <div className='grid w-full max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
           {products.map((product) => (
             <div key={product._id} className='flex justify-center'>
               <ProductCard product={product} />
