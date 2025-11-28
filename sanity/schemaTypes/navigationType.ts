@@ -1,9 +1,11 @@
+import { LayoutDashboard } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "navigation",
   title: "Navigation",
   type: "document",
+  icon:LayoutDashboard,
   fields: [
     defineField({
       name: "title",

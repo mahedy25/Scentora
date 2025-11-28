@@ -1,9 +1,11 @@
+import { MessageCircleHeart } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "review",
   title: "Reviews",
   type: "document",
+  icon:MessageCircleHeart,
   fields: [
     defineField({
       name: "product",

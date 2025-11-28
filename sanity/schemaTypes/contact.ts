@@ -1,11 +1,11 @@
-import { AddCommentIcon } from "@sanity/icons";
+import { ContactRoundIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "contact",
   title: "Contact Form Submissions",
   type: "document",
-  icon: AddCommentIcon,
+  icon: ContactRoundIcon,
   fields: [
     defineField({
       name: "name",
