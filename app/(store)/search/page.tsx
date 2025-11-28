@@ -33,9 +33,9 @@ export default async function Search({
             fragrance or keyword.
           </p>
 
-          <Link href='/products'>
+          <Link href='/all-products'>
             <Button className='mt-6 w-full bg-[#D9004C] text-white hover:bg-[#670626] py-3 rounded-md'>
-              Back to Shop
+              View Available Products
             </Button>
           </Link>
         </div>
