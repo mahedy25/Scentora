@@ -14,12 +14,10 @@ import { useCartStore } from '@/app/(store)/store'
 import Form from 'next/form'
 import { useState } from 'react'
 import { XIcon } from 'lucide-react'
-import { Lobster } from 'next/font/google'
+import { Cinzel } from 'next/font/google'
+const cinzel = Cinzel({ weight: '700', subsets: ['latin'] })
 
-const lobster = Lobster({
-  weight: '400',
-  subsets: ['latin'],
-})
+
 
 export default function Header() {
   const { user } = useUser()
@@ -41,32 +39,49 @@ export default function Header() {
 
   return (
     <section className='flex flex-wrap justify-between items-center px-6 py-4 bg-white shadow-md'>
+      {/* LOGO */}
       <Link
         href='/'
-        className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide`}
+        className={`${cinzel.className} uppercase text-4xl text-[#670626] tracking-[0.12em]`}
       >
-        Cube Fashion
+        Scentora
       </Link>
 
       {/* SEARCH BAR */}
       <Form
         action='/search'
-        className='w-full sm:w-auto sm:flex-1 sm:mx-6 mt-4 sm:mt-0'
+        className='w-full sm:flex-1 sm:mx-8 mt-4 sm:mt-0 flex justify-center'
       >
-        <div className='relative w-full max-w-full sm:max-w-xl'>
+        <div
+          className='
+        relative w-full max-w-lg
+        bg-white/60 backdrop-blur-md border border-[#670626]/20
+        shadow-sm rounded-full overflow-hidden
+        transition-all focus-within:ring-2 focus-within:ring-[#D9004C]/60
+      '
+        >
           <input
             type='text'
             name='query'
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder='Search for products'
-            className='bg-gray-200 text-gray-800 px-5 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#670626] w-full text-lg pr-10'
+            placeholder='Search Perfume Brands...'
+            className='
+          text-[#D9004C] font-semibold px-5 py-3 pr-12 w-full
+          placeholder:text-black/50 text-base sm:text-lg 
+          bg-transparent focus:outline-none
+        '
           />
+
+          {/* CLEAR BUTTON */}
           {searchQuery && (
             <button
               type='button'
               onClick={clearSearch}
-              className='cursor-pointer absolute top-1/2 right-3 transform -translate-y-1/2 text-black'
+              className='
+            absolute cursor-pointer top-1/2 right-4 -translate-y-1/2
+            text-gray-600 hover:text-[#D9004C] transition
+          '
             >
               <XIcon className='w-5 h-5' />
             </button>

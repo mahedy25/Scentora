@@ -38,9 +38,16 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className={`group flex flex-col p-5 border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-white ${
-        isOutOfStock ? 'opacity-50' : ''
-      } max-w-[310px]`}
+      className={`
+        group flex flex-col 
+        p-5 rounded-xl 
+        border border-gray-200 
+        shadow-sm hover:shadow-xl 
+        hover:border-[#D9004C]/40
+        transition-all duration-300 
+        bg-white 
+        ${isOutOfStock ? 'opacity-50' : ''}
+      `}
     >
       {/* IMAGE */}
       <Link
@@ -48,7 +55,7 @@ export default function ProductCard({ product }: { product: Product }) {
         className='relative w-full h-[220px] overflow-hidden rounded-lg block'
       >
         {discount && (
-          <span className='absolute top-3 left-3 z-10 inline-block px-2 py-1 text-xs font-semibold rounded-md bg-[#D9004C] text-white shadow'>
+          <span className='absolute top-3 left-3 z-10 px-2 py-1 text-xs font-semibold rounded-md bg-[#D9004C] text-white shadow-md'>
             {percentOff ? `${percentOff}% OFF` : 'Sale'}
           </span>
         )}
@@ -76,7 +83,7 @@ export default function ProductCard({ product }: { product: Product }) {
         href={`/product/${product.slug?.current}`}
         className='mt-4 block flex-1'
       >
-        <h2 className='text-lg font-semibold text-gray-900 leading-tight'>
+        <h2 className='text-lg font-semibold text-gray-900 leading-tight group-hover:text-[#D9004C] transition-colors'>
           {product.name}
         </h2>
 
@@ -86,12 +93,12 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       {/* PRICE + ADD TO CART */}
-      <div className='mt-4 flex items-center justify-between w-full'>
-        {/* PRICE */}
+      <div className='mt-5 flex items-center justify-between w-full'>
+        {/* PRICE SECTION */}
         <div className='flex flex-col'>
           {discount && price ? (
             <>
-              <span className='text-lg font-bold text-gray-900'>
+              <span className='text-xl font-bold text-gray-900'>
                 ${discount.toFixed(2)}
               </span>
               <span className='text-sm text-gray-500 line-through'>
@@ -99,21 +106,17 @@ export default function ProductCard({ product }: { product: Product }) {
               </span>
             </>
           ) : price ? (
-            <span className='text-lg font-bold text-gray-900'>
+            <span className='text-xl font-bold text-gray-900'>
               ${price.toFixed(2)}
             </span>
           ) : (
-            <span className='text-lg font-bold text-gray-900'>—</span>
+            <span className='text-xl font-bold text-gray-900'>—</span>
           )}
         </div>
 
-        {/* ADD TO CART BUTTON - Clean & Professional */}
+        {/* CART BUTTON */}
         <div onClick={(e) => e.stopPropagation()} className='shrink-0'>
-          <div className='px-2 py-1 sm:px-3 sm:py-2'>
-            
-              <AddToCart product={product} disabled={isOutOfStock} />
-         
-          </div>
+          <AddToCart product={product} disabled={isOutOfStock} />
         </div>
       </div>
     </div>

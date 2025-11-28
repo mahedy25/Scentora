@@ -1,46 +1,62 @@
 import Link from 'next/link'
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 import { NewsletterForm } from '../NewsletterForm'
+import { Cinzel } from 'next/font/google'
+
+const cinzel = Cinzel({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+})
 
 export default function Footer() {
   return (
-    <footer className='bg-[#0f0f0f] text-gray-300 pt-16 pb-10 mt-auto w-full'>
+    <footer className='bg-black text-gray-300 pt-16 pb-10 mt-auto w-full border-t border-white/10'>
       <div className='max-w-screen-2xl mx-auto px-6'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12'>
-          {/* Brand */}
+        <div
+          className='
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+          gap-14
+        '
+        >
+          {/* BRAND */}
           <div>
-            <h2 className='text-2xl font-bold text-white tracking-wide'>
-              CubeFashion
+            <h2
+              className={`${cinzel.className} text-3xl font-semibold text-white`}
+            >
+              Scentora
             </h2>
-            <p className='mt-4 text-sm text-gray-400 leading-relaxed'>
-              Premium quality products delivered straight to your doorstep.
-              Experience the best with YourBrand.
+
+            <p className='mt-4 text-sm text-gray-400 leading-relaxed max-w-xs'>
+              Crafting timeless fragrances with elegance and depth. Scentora
+              blends luxury with artistry — creating scents that leave a lasting
+              impression.
             </p>
 
-            {/* Social Icons */}
+            {/* SOCIAL ICONS */}
             <div className='flex gap-4 mt-6'>
-              <Link href='#' className='hover:text-white transition'>
-                <Facebook size={20} />
-              </Link>
-              <Link href='#' className='hover:text-white transition'>
-                <Instagram size={20} />
-              </Link>
-              <Link href='#' className='hover:text-white transition'>
-                <Twitter size={20} />
-              </Link>
-              <Link href='#' className='hover:text-white transition'>
-                <Youtube size={20} />
-              </Link>
+              {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
+                <Link
+                  key={i}
+                  href='#'
+                  className='hover:text-white transition-colors'
+                >
+                  <Icon size={20} />
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Shop */}
+          {/* SHOP */}
           <div>
-            <h3 className='text-lg font-semibold text-white mb-4'>Shop</h3>
+            <h3
+              className={`${cinzel.className} text-lg font-semibold text-white mb-4`}
+            >
+              Shop
+            </h3>
             <ul className='space-y-2 text-sm text-gray-400'>
               <li>
                 <Link className='hover:text-white' href='/products'>
-                  All Products
+                  All Perfumes
                 </Link>
               </li>
               <li>
@@ -61,10 +77,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Support */}
+          {/* SUPPORT */}
           <div>
-            <h3 className='text-lg font-semibold text-white mb-4'>
-              Customer Support
+            <h3
+              className={`${cinzel.className} text-lg font-semibold text-white mb-4`}
+            >
+              Customer Care
             </h3>
             <ul className='space-y-2 text-sm text-gray-400'>
               <li>
@@ -74,7 +92,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link className='hover:text-white' href='/shipping'>
-                  Shipping Info
+                  Shipping & Delivery
                 </Link>
               </li>
               <li>
@@ -90,24 +108,31 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* NEWSLETTER */}
           <div>
-            <h3 className='text-lg font-semibold text-white mb-4'>
-              Join Our Newsletter
+            <h3
+              className={`${cinzel.className} text-lg font-semibold text-white mb-4`}
+            >
+              Join the Scentora Circle
             </h3>
-            <p className='text-sm text-gray-400 mb-4'>
-              Be the first to hear about new products and exclusive offers.
+            <p className='text-sm text-gray-400 mb-4 max-w-xs'>
+              Receive exclusive launches, rare limited editions, and
+              private-member fragrance drops.
             </p>
 
             <NewsletterForm />
           </div>
         </div>
 
-        {/* Divider */}
-        <div className='border-t border-gray-800 mt-16 pt-6'>
-          <p className='text-center text-sm text-gray-500'>
-            © {new Date().getFullYear()} CubeFashion — All Rights Reserved.
-          </p>
+        {/* DIVIDER */}
+        <div className='w-40 h-1 mx-auto mt-16 relative'>
+          <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full'></div>
+          <div className='absolute inset-0 blur-lg bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-60 rounded-full'></div>
+        </div>
+
+        {/* COPYRIGHT */}
+        <div className='pt-6 text-center text-sm text-gray-500 mb-20'>
+          © {new Date().getFullYear()} Scentora — The Art of Fragrance.
         </div>
       </div>
     </footer>

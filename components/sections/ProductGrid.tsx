@@ -9,11 +9,11 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       <div className='text-center text-lg text-gray-500'>
         No products available
       </div>
-    ) // Graceful fallback
+    )
   }
 
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-6 py-10 gap-6'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
       {products.map((product) => (
         <AnimatePresence key={product._id}>
           <motion.div

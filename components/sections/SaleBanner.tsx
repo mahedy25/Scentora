@@ -1,13 +1,11 @@
-import Image from 'next/image'
 import { Button } from '../ui/button'
 import { getActiveSaleByCouponCode } from '@/sanity/lib/sales/getActiveSaleByCouponCode'
 import { COUPON_CODES } from '@/sanity/lib/sales/couponCodes'
-import { Lobster } from 'next/font/google'
 import Link from 'next/link'
+import { Cinzel } from 'next/font/google'
 
-// Define the Lobster font
-const lobster = Lobster({
-  weight: '400',
+const cinzel = Cinzel({
+  weight: ['400', '600', '700'],
   subsets: ['latin'],
 })
 
@@ -17,45 +15,93 @@ export default async function SaleBanner() {
   if (!sale?.isActive) return null
 
   return (
-    <div className='bg-linear-to-r from-[#670626] to-[#D9004C] text-white py-8 px-6 sm:px-10 font-medium shadow-lg rounded-lg flex flex-col sm:flex-row items-center justify-between'>
-      {/* Left Side - Text */}
-      <div className='sm:w-1/2 text-center sm:text-left mb-6 sm:mb-0 flex flex-col justify-center'>
-        <h2
-          className={`text-3xl sm:text-5xl font-extrabold leading-tight ${lobster.className}`}
-        >
-          🎉 {sale.title}
-        </h2>
-        <p className='mt-4 text-lg sm:text-xl'>{sale.description}</p>
-        <div className='mt-6'>
-          <h3 className='text-lg sm:text-xl font-semibold'>
-            Use Code:{' '}
-            <span className='font-extrabold text-yellow-300'>
+    <div
+      className='
+        bg-linear-to-br from-[#D9004C] via-[#7A002A] to-black
+        text-white rounded-2xl shadow-2xl
+        px-8 py-14 sm:px-12 lg:px-20
+        border border-white/10
+      '
+    >
+      <div
+        className='
+          grid 
+          grid-cols-1 md:grid-cols-2 
+          gap-12 md:gap-20
+          items-center
+        '
+      >
+        {/* LEFT — HEADLINE + DESCRIPTION */}
+        <div className='space-y-6 lg:space-y-8'>
+          <h2
+            className={`
+              text-4xl sm:text-5xl lg:text-6xl 
+              font-bold leading-tight tracking-tight
+              ${cinzel.className}
+            `}
+          >
+            {sale.title}
+          </h2>
+
+          <p
+            className='
+              text-lg sm:text-xl lg:text-2xl
+              text-white/85 leading-relaxed 
+              max-w-xl
+            '
+          >
+            {sale.description}
+          </p>
+        </div>
+
+        {/* RIGHT — COUPON CARD */}
+        <div className='flex md:justify-end'>
+          <div
+            className='
+              bg-white/10 backdrop-blur-2xl
+              px-8 py-7 rounded-2xl
+              border border-white/20
+              shadow-xl 
+              w-full sm:w-auto
+              space-y-4
+              text-center md:text-left
+            '
+          >
+            <p className='text-sm sm:text-base uppercase tracking-wide text-white/70'>
+              Use Code
+            </p>
+
+            <span
+              className='
+                bg-white text-black 
+                px-8 py-3 rounded-md 
+                text-xl sm:text-2xl 
+                font-bold tracking-widest 
+                inline-block shadow-md
+              '
+            >
               {sale.couponCode}
             </span>
-          </h3>
-          <h4 className='text-md sm:text-lg mt-2'>
-            for <span className='font-extrabold'>{sale.discountAmount}%</span>{' '}
-            off on a<span className='font-bold'> $30 or more purchase</span>
-          </h4>
-        </div>
-        <div>
-          <Link href='/all-products'>
-            <Button className='mt-8 py-3 px-8 text-lg  uppercase tracking-wide'>
-              Shop Now
-            </Button>
-          </Link>
-        </div>
-      </div>
 
-      {/* Right Side - Image */}
-      <div className='hidden sm:w-1/2 mt-6 sm:mt-0 md:flex justify-center sm:justify-end'>
-        <Image
-          src='/images/sale.jpg' // Add your sale-related image here
-          alt='Weekend Sale'
-          width={300} // Adjust the width and height as needed
-          height={300}
-          className='object-contain rounded-lg shadow-2xl'
-        />
+            <p className='text-sm sm:text-base text-white/75'>
+              {sale.discountAmount}% off orders over{' '}
+              <span className='font-semibold'>$30</span>
+            </p>
+
+            <Link href='/all-products'>
+              <Button
+                className='
+                  mt-2 py-3 px-10
+                  text-base sm:text-lg 
+                  font-semibold uppercase 
+                  tracking-wide w-full md:w-auto
+                '
+              >
+                Shop Now
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   )

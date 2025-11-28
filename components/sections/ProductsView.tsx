@@ -9,17 +9,20 @@ interface ProductsViewProps {
 
 const ProductsView = ({ products, categories }: ProductsViewProps) => {
   return (
-    <div className='flex flex-col gap-6 p-4'>
-      {/* Categories Section */}
-      <div className='flex justify-center items-center'>
-        <div className='w-full max-w-[250px] md:max-w-[300px] lg:max-w-[350px]'>
+    <div className='flex flex-col gap-10  py-4'>
+      {/* CATEGORY DROPDOWN */}
+      <div className='flex justify-center'>
+        <div className='w-full max-w-xs sm:max-w-sm md:max-w-md'>
           <CategorySelector categories={categories} />
         </div>
       </div>
 
-      {/* Products Section */}
-      <div className='w-full bg-white rounded-lg'>
-        {/* Render All The Products */}
+      {/* PRODUCTS LIST */}
+      <div
+        className='
+          bg-white rounded-xl 
+        '
+      >
         <ProductGrid products={products} />
       </div>
     </div>

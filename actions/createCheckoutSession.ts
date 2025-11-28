@@ -55,30 +55,39 @@ export async function createCheckoutSession(
     const successUrl = `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`;
     const cancelUrl = `${baseUrl}/cart`;
 
-    const session = await stripe.checkout.sessions.create({
-      customer: customerId,
-      metadata,
-      mode: "payment",
-      allow_promotion_codes: true,
-      success_url: successUrl,
-      cancel_url: cancelUrl,
+   const session = await stripe.checkout.sessions.create({
+  customer: customerId,
 
-      line_items: items.map((item) => ({
-        price_data: {
-          currency: "usd",
-          unit_amount: Math.round(item.product.price! * 100),
-          product_data: {
-            name: item.product.name ?? "Product",
-            metadata: { id: item.product._id },
-            description: `Product ID: ${item.product._id}`,
-            images: item.product.image
-              ? [imageUrl(item.product.image).url()]
-              : undefined,
-          },
-        },
-        quantity: item.quantity,
-      })),
-    });
+  // ✅ FIX – always send metadata manually & flat
+  metadata: {
+    orderNumber: metadata.orderNumber,
+    customerName: metadata.customerName,
+    customerEmail: metadata.customerEmail,
+    clerkUserId: metadata.clerkUserId,
+  },
+
+  mode: "payment",
+  allow_promotion_codes: true,
+  success_url: successUrl,
+  cancel_url: cancelUrl,
+
+  line_items: items.map((item) => ({
+    price_data: {
+      currency: "usd",
+      unit_amount: Math.round(item.product.price! * 100),
+      product_data: {
+        name: item.product.name ?? "Product",
+        metadata: { id: item.product._id },
+        description: `Product ID: ${item.product._id}`,
+        images: item.product.image
+          ? [imageUrl(item.product.image).url()]
+          : undefined,
+      },
+    },
+    quantity: item.quantity,
+  })),
+});
+
 
     return session.url;
   } catch (error) {

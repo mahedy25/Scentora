@@ -13,10 +13,10 @@ import {
   Metadata,
 } from '@/actions/createCheckoutSession'
 import { Button } from '@/components/ui/button'
-import { Lobster } from 'next/font/google'
+import { Cinzel } from 'next/font/google'
 
-const lobster = Lobster({
-  weight: '400',
+const cinzel = Cinzel({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
 })
 
@@ -29,29 +29,23 @@ export default function Cart() {
   const [isClient, setIsClient] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  // Wait for the client to mount
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  useEffect(() => setIsClient(true), [])
 
-  if (!isClient) {
-    return <Loader />
-  }
+  if (!isClient) return <Loader />
 
+  // EMPTY CART
   if (groupedItems.length === 0) {
     return (
-      <div className='container mx-auto p-4 flex flex-col items-center justify-start h-screen'>
+      <div className='container min-h-screen mx-auto p-4 flex flex-col items-center h-screen justify-center'>
         <h1
-          className={`text-2xl sm:text-3xl md:text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90  cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
+          className={`text-3xl ${cinzel.className} text-[#670626] mb-3 tracking-wide`}
         >
           My Shopping Cart
         </h1>
 
-        {/* ✨ Modern Gradient Divider */}
-        <div className='relative w-32 h-1 mx-auto mb-8'>
-          <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full'></div>
-          <div className='absolute inset-0 blur-md bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-60'></div>
-        </div>
+        {/* Elegant Divider */}
+        <div className='w-28 h-1 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full mb-6'></div>
+
         <p className='text-gray-600 text-lg'>Your cart is currently empty</p>
       </div>
     )
@@ -68,10 +62,9 @@ export default function Cart() {
         customerEmail: user?.emailAddresses[0].emailAddress ?? 'Unknown',
         clerkUserId: user!.id,
       }
+
       const checkoutUrl = await createCheckoutSession(groupedItems, metadata)
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl
-      }
+      if (checkoutUrl) window.location.href = checkoutUrl
     } catch (error) {
       console.log('Error creating checkout session:', error)
     } finally {
@@ -80,92 +73,92 @@ export default function Cart() {
   }
 
   return (
-    <div className='container mx-auto p-4 max-w-6xl h-screen'>
+    <div className='container min-h-screen mx-auto p-4 max-w-6xl'>
+      {/* Heading */}
       <h1
-        className={`text-2xl sm:text-3xl md:text-4xl ${lobster.className} text-[#670626] hover:text-[#670626]/90 cursor-pointer tracking-wide mb-4 text-center md:mb-6`}
+        className={`text-3xl ${cinzel.className} text-[#670626] mb-2 text-center`}
       >
         My Shopping Cart
       </h1>
 
-      {/* ✨ Modern Gradient Divider */}
-      <div className='relative w-32 h-1 mx-auto mb-8'>
-        <div className='absolute inset-0 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full'></div>
-        <div className='absolute inset-0 blur-md bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] opacity-60'></div>
-      </div>
-      <div className='flex flex-col lg:flex-row gap-8'>
+      <div className='w-28 h-1 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full mx-auto mb-10'></div>
+
+      <div className='flex flex-col lg:flex-row gap-10'>
+        {/* CART ITEMS */}
         <div className='grow'>
-          {groupedItems?.map((item) => (
+          {groupedItems.map((item) => (
             <div
               key={item.product._id}
-              className='mb-4 p-4 border rounded flex flex-col sm:flex-row  items-center gap-2 justify-between '
+              className='p-4 border rounded-xl shadow-sm hover:shadow-md transition bg-white flex flex-col sm:flex-row items-center gap-4 mb-4'
             >
               <div
-                className='flex items-center cursor-pointer flex-1 min-w-0'
+                className='flex items-center flex-1 cursor-pointer'
                 onClick={() =>
                   router.push(`/product/${item.product.slug?.current}`)
                 }
               >
-                <div className='w-20 h-20 sm:w-24 sm:h-24 shrink-0 mr-4'>
+                <div className='w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-lg overflow-hidden'>
                   {item.product.image && (
                     <Image
                       src={imageUrl(item.product.image).url()}
                       alt={item.product.name ?? 'Product image'}
-                      className='w-full h-full object-cover rounded'
                       width={96}
                       height={96}
+                      className='w-full h-full object-cover'
                     />
                   )}
                 </div>
-                <div className='min-w-0'>
-                  <h2 className='text-lg sm:text-xl font-semibold truncate'>
-                    {item.product.name}
-                  </h2>
-                  <div className='text-sm sm:text-base'>
-                    <p className='text-sm sm:text-base'>
-                      Price: $
-                      {(item.product.price ?? 0 * item.quantity).toFixed(2)}
-                    </p>
-                  </div>
+
+                <div className='ml-4'>
+                  <h2 className='text-lg font-semibold'>{item.product.name}</h2>
+                  <p className='text-sm text-gray-600 mt-1'>
+                    Price: ${item.product.price?.toFixed(2)}
+                  </p>
                 </div>
               </div>
-              <div className='flex items-center ml-4 shrink-0'>
+
+              <div className='shrink-0'>
                 <AddToCartButton product={item.product} />
               </div>
             </div>
           ))}
         </div>
-        <div className='w-full lg:w-80 lg:sticky lg:top-4 h-fit bg-white p-6 border rounded order-first lg:order-last shadow-lg lg:shadow-md mt-8 lg:mt-0'>
-          <h3 className='text-xl font-semibold mb-4'>Order Summary</h3>
-          <div className='mt-4 space-y-2'>
-            <p className='flex justify-between'>
+
+        {/* ORDER SUMMARY */}
+        <div className='w-full lg:w-80 bg-white p-6 border rounded-xl shadow-lg h-fit'>
+          <h3 className={`text-xl font-semibold mb-4 ${cinzel.className}`}>
+            Order Summary
+          </h3>
+
+          <div className='space-y-3'>
+            <p className='flex justify-between text-gray-700'>
               <span>Items:</span>
               <span>
-                {groupedItems.reduce((total, item) => total + item.quantity, 0)}
+                {groupedItems.reduce((t, item) => t + item.quantity, 0)}
               </span>
             </p>
-            <p className='flex justify-between text-2xl font-bold border-t pt-2'>
+
+            <p className='flex justify-between text-2xl font-bold border-t pt-3 text-[#670626]'>
               <span>Total:</span>
               <span>${useCartStore.getState().getTotalPrice().toFixed(2)}</span>
             </p>
           </div>
+
           {isSignedIn ? (
             <Button
               onClick={handleCheckout}
               disabled={isLoading}
-              className='mt-4 w-full  px-4 py-2 rounded  disabled:bg-gray-400'
+              className='mt-5 w-full bg-[#670626] text-white hover:bg-[#D9004C] py-3 rounded-md transition disabled:bg-gray-400'
             >
               {isLoading ? 'Processing...' : 'Checkout'}
             </Button>
           ) : (
             <SignInButton mode='modal'>
-              <Button className='mt-4 w-full bg-[#670626] text-white px-4 py-2 rounded hover:bg-[#D9004C]'>
+              <Button className='mt-5 w-full bg-[#670626] text-white hover:bg-[#D9004C] py-3 rounded-md transition'>
                 Sign in to Checkout
               </Button>
             </SignInButton>
           )}
-        </div>
-        <div className='h-64 lg:h-0'>
-          {/* Spacer for fixed checkout on mobile */}
         </div>
       </div>
     </div>

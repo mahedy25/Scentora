@@ -1,13 +1,18 @@
 import AddToCart from '@/components/AddToCart'
 import ProductGallery from '@/components/sections/ProductGallary'
 import ReviewForm from '@/components/ReviewForm'
-
 import { getProductBySlug } from '@/sanity/lib/products/getProductBySlug'
 import { PortableText } from 'next-sanity'
 import { notFound } from 'next/navigation'
+import { Cinzel } from 'next/font/google'
 
 export const dynamic = 'force-static'
 export const revalidate = 60
+
+const cinzel = Cinzel({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+})
 
 export default async function Product({
   params,
@@ -38,12 +43,12 @@ export default async function Product({
     : null
 
   return (
-    <div className='container mx-auto px-4 sm:px-6 lg:px-10 py-14 md:py-20'>
+    <div className='container mx-auto px-4 sm:px-6 lg:px-10 py-16 md:py-24'>
       {/* GRID */}
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-12 xl:gap-20 items-start'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-16 items-start'>
         {/* GALLERY */}
         <div className='w-full flex justify-center'>
-          <div className='w-full max-w-[500px] lg:max-w-[540px]'>
+          <div className='w-full max-w-[530px]'>
             <ProductGallery product={product} />
           </div>
         </div>
@@ -52,7 +57,9 @@ export default async function Product({
         <div className='space-y-10'>
           {/* TITLE + RATING */}
           <div>
-            <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.15]'>
+            <h1
+              className={`${cinzel.className} text-3xl sm:text-4xl md:text-5xl font-semibold text-[#670626] leading-[1.15]`}
+            >
               {product.name}
             </h1>
 
@@ -71,10 +78,10 @@ export default async function Product({
           </div>
 
           {/* PRICE BOX */}
-          <div className='bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-md border border-gray-200'>
+          <div className='bg-white border border-gray-200 p-6 rounded-2xl shadow-sm'>
             {discount && price ? (
               <div className='flex items-center flex-wrap gap-4'>
-                <p className='text-4xl font-extrabold text-gray-900'>
+                <p className='text-4xl font-extrabold text-[#670626]'>
                   ${discount.toFixed(2)}
                 </p>
 
@@ -89,7 +96,7 @@ export default async function Product({
                 )}
               </div>
             ) : price ? (
-              <p className='text-4xl font-extrabold text-gray-900'>
+              <p className='text-4xl font-extrabold text-[#670626]'>
                 ${price.toFixed(2)}
               </p>
             ) : (
@@ -115,9 +122,11 @@ export default async function Product({
         </div>
       </div>
 
-      {/* REVIEW FORM */}
+      {/* REVIEW FORM SECTION */}
       <div className='mt-24 border-t pt-16'>
-        <h2 className='text-2xl sm:text-3xl font-bold mb-8 tracking-tight text-gray-900'>
+        <h2
+          className={`${cinzel.className} text-2xl sm:text-3xl font-semibold text-[#670626] mb-8`}
+        >
           Write a Review
         </h2>
         <ReviewForm productId={product._id} />
@@ -125,7 +134,9 @@ export default async function Product({
 
       {/* REVIEW LIST */}
       <div className='mt-24'>
-        <h2 className='text-2xl sm:text-3xl font-bold mb-10 tracking-tight text-gray-900'>
+        <h2
+          className={`${cinzel.className} text-2xl sm:text-3xl font-semibold text-[#670626] mb-10`}
+        >
           Customer Reviews
         </h2>
 
@@ -134,7 +145,7 @@ export default async function Product({
             {product.reviews.map((review, i) => (
               <div
                 key={i}
-                className='p-6 rounded-2xl border bg-white shadow-sm hover:shadow-lg transition-all duration-200'
+                className='p-6 rounded-2xl border bg-white shadow-sm hover:shadow-md transition-all'
               >
                 <p className='text-yellow-500 text-xl mb-1'>
                   {'★'.repeat(review.rating || 0)}

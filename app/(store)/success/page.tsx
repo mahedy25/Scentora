@@ -1,10 +1,16 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
 
+import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useCartStore } from '../store'
+import { Cinzel } from 'next/font/google'
+
+const cinzel = Cinzel({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+})
 
 export default function Success() {
   const searchParams = useSearchParams()
@@ -13,70 +19,81 @@ export default function Success() {
   const clearCart = useCartStore((state) => state.clearCart)
 
   useEffect(() => {
-    // Only clear cart if we have both order number and session id (ensures successful payment)
     if (orderNumber && sessionId) {
-      console.log('Order Number:', orderNumber)
-      console.log('Payment successful, clearing cart...')
-
-      clearCart() // Clear Zustand state
-      useCartStore.persist.clearStorage() // Clear persisted cart in localStorage
-
-      // Force a re-render by updating a local state (this can help reset cart count if needed)
-      // You can use a dummy state trigger here if necessary
+      clearCart()
+      useCartStore.persist.clearStorage()
     }
   }, [orderNumber, sessionId, clearCart])
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6'>
-      <div className='flex flex-col items-center mb-12'>
-        <div className='flex justify-center mb-6'>
-          <div className='h-20 w-20 bg-green-100 rounded-full flex items-center justify-center shadow-lg'>
-            <svg
-              className='h-12 w-12 text-green-500'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M5 13l4 4L19 7'
-              />
-            </svg>
-          </div>
-        </div>
-        <h1 className='text-3xl font-semibold text-green-700 text-center mb-4'>
-          Thanks for Your Order!
-        </h1>
-        <p className='text-lg text-gray-600 text-center'>
-          Your order is being processed.
-        </p>
-        <div className='space-y-2'>
-          {orderNumber && (
-            <p className='text-lg text-gray-600 text-center'>
-              Order Number: {orderNumber}
-            </p>
-          )}
-          {sessionId && (
-            <p className='text-lg text-gray-600 text-center'>
-              Session ID: {sessionId}
-            </p>
-          )}
+    <div className='flex flex-col items-center justify-center min-h-screen bg-white px-6 py-10'>
+      {/* SUCCESS ICON */}
+      <div className='flex justify-center mb-8'>
+        <div className='h-24 w-24 bg-[#e9e5dc] rounded-full flex items-center justify-center shadow-md'>
+          <svg
+            className='h-14 w-14 text-[#198a0b]'
+            fill='none'
+            stroke='currentColor'
+            viewBox='0 0 24 24'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M5 13l4 4L19 7'
+            />
+          </svg>
         </div>
       </div>
-      <div className='space-y-4'>
-        <p className='text-gray-600'>
-          A confirmation email will be sent to your email address.
-        </p>
-        <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-          <Button asChild className='bg-green-500 hover:bg-green-700'>
-            <Link href='/orders'>View Order History</Link>
-          </Button>
-          <Button asChild variant='outline'>
-            <Link href='/'>Continue Shopping</Link>
-          </Button>
-        </div>
+
+      {/* TITLE */}
+      <h1
+        className={`${cinzel.className} text-3xl font-semibold text-[#670626] text-center mb-3`}
+      >
+        Thank You for Your Order
+      </h1>
+
+      <p className='text-base text-gray-700 text-center mb-6'>
+        Your purchase was successful and is now being processed.
+      </p>
+
+      {/* ORDER DETAILS */}
+      <div className='space-y-1 mb-8 text-center'>
+        {orderNumber && (
+          <p className='text-sm text-gray-600'>
+            <span className='font-semibold text-[#670626]'>Order Number:</span>{' '}
+            {orderNumber}
+          </p>
+        )}
+        {sessionId && (
+          <p className='text-sm text-gray-600'>
+            <span className='font-semibold text-[#670626]'>Session ID:</span>{' '}
+            {sessionId}
+          </p>
+        )}
+      </div>
+
+      {/* FOOTER TEXT */}
+      <p className='text-gray-600 text-center mb-8'>
+        A confirmation email has been sent to your inbox.
+      </p>
+
+      {/* BUTTONS */}
+      <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+        <Button
+          asChild
+          className='bg-[#670626] hover:bg-[#D9004C] text-white px-8 py-3 rounded-md'
+        >
+          <Link href='/orders'>View Order History</Link>
+        </Button>
+
+        <Button
+          asChild
+          variant='outline'
+          className='border-[#670626] text-[#670626] hover:bg-[#f8e7eb] px-8 py-3 rounded-md'
+        >
+          <Link href='/'>Continue Shopping</Link>
+        </Button>
       </div>
     </div>
   )
