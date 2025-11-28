@@ -42,7 +42,11 @@ export default function Header() {
       {/* LOGO */}
       <Link
         href='/'
-        className={`${cinzel.className} uppercase text-4xl text-[#670626] tracking-[0.12em]`}
+        className={`
+    ${cinzel.className}
+    uppercase tracking-[0.12em] text-[#670626]
+    text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+  `}
       >
         Scentora
       </Link>

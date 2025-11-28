@@ -1,5 +1,11 @@
 import Link from 'next/link'
 import { DynamicIcon } from '../DynamicIcon'
+import { Cinzel } from 'next/font/google'
+
+const cinzel = Cinzel({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+})
 
 interface NavItem {
   title?: string | null
@@ -45,19 +51,22 @@ export function NavbarClient({ navItems }: NavbarClientProps) {
     <>
       {/* Floating Dock */}
       <div
-        className='fixed bottom-0 left-1/2 -translate-x-1/2 md:-translate-y-1/2 
-        z-9999 pointer-events-none group/dock transition-all duration-300'
+        className='
+          fixed bottom-6 left-1/2 -translate-x-1/2 
+          z-9999 pointer-events-none group/dock
+          transition-all duration-300
+        '
       >
         <div
           className='
-            flex items-center gap-2 px-3 py-2.5 rounded-xl md:rounded-2xl
-            bg-white/70 dark:bg-[#1f1f1f]/70
-            backdrop-blur-xl
-            border border-white/60 dark:border-white/10
-            shadow-[0_8px_32px_rgba(0,0,0,0.25)]
-            dark:shadow-[0_8px_32px_rgba(0,0,0,0.6)]
-            hover:bg-white/80 dark:hover:bg-[#2a2a2a]/80
+            flex items-center gap-3 px-4 py-3 
+            rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.45)]
             pointer-events-auto transition-all duration-300
+
+            /* New premium theme */
+            bg-linear-to-br from-[#2b0011]/90 via-[#3a0014]/70 to-black/60
+            backdrop-blur-2xl
+            border border-[#ff0055]/10
           '
         >
           {mobile.visible.map((item) => (
@@ -85,17 +94,15 @@ function DockTooltip({
 
   return (
     <div
-      className={`
-        absolute px-3 py-1.5 rounded-xl backdrop-blur-xl
-        bg-white dark:bg-[#111]
-        text-neutral-900 dark:text-neutral-200
-        border border-black/10 dark:border-white/10
-        shadow-xl whitespace-nowrap
-        opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100
-        transition-all duration-300
+      className={`${cinzel.className}
+        absolute font-semibold px-3 py-1.5 rounded-xl backdrop-blur-xl
+        bg-black/85 text-white tracking-wide
+        border border-white/10 shadow-2xl whitespace-nowrap
+        opacity-0 scale-90 group-hover:opacity-100 
+        group-hover:scale-100 transition-all duration-300
         ${
           isHorizontal
-            ? '-top-10 left-1/2 -translate-x-1/2'
+            ? '-top-11 left-1/2 -translate-x-1/2'
             : 'right-14 top-1/2 -translate-y-1/2'
         }
       `}
@@ -104,9 +111,8 @@ function DockTooltip({
 
       <div
         className={`
-          absolute w-2 h-2 rotate-45 
-          bg-white dark:bg-[#111]
-          border border-black/10 dark:border-white/10
+          absolute w-2 h-2 rotate-45 bg-black
+          border border-white/10
           ${
             isHorizontal
               ? '-bottom-1 left-1/2 -translate-x-1/2'
@@ -121,7 +127,6 @@ function DockTooltip({
 /* Dock Icon Component */
 function DockIcon({
   item,
-  isVertical,
   onItemClick,
 }: {
   item: DockLink
@@ -129,25 +134,17 @@ function DockIcon({
   onItemClick?: () => void
 }) {
   const baseIconClasses =
-    'relative flex items-center justify-center w-full h-full rounded-full backdrop-blur-xl transition-all'
+    'relative flex items-center justify-center w-full h-full rounded-full transition-all'
 
-  const verticalIconClasses = `
-    ${baseIconClasses}
-    bg-white/40 dark:bg-white/20
-    border border-white/50 dark:border-white/30
-    hover:scale-110
-    hover:bg-white/50 dark:hover:bg-white/30
-    hover:border-white/70 dark:hover:border-white/40
-    duration-300
-  `
 
   const horizontalIconClasses = `
     ${baseIconClasses}
-    bg-black/5 dark:bg-white/10
-    border border-black/10 dark:border-white/20
-    group-hover/dock:bg-black/10 dark:group-hover/dock:bg-white/20
-    group-hover/dock:border-black/20 dark:group-hover/dock:border-white/40
-    hover:scale-125 hover:-translate-y-2 md:hover:-translate-y-3
+    bg-white backdrop-blur-xl
+    border border-[#ff0055]/20
+    hover:border-[#ff0055]/40
+    hover:bg-black/60 
+    hover:scale-125 hover:-translate-y-2
+    shadow-[0_0_18px_rgba(255,0,90,0.2)]
     transition-all duration-300
   `
 
@@ -161,28 +158,24 @@ function DockIcon({
 
   const content = (
     <>
-      <div className={isVertical ? verticalIconClasses : horizontalIconClasses}>
+      <div className={horizontalIconClasses}>
         <div
-          className={`
-            w-6 h-6 md:w-6 md:h-6
-            text-neutral-700 dark:text-neutral-200
-            group-hover/dock:text-neutral-900 dark:group-hover/dock:text-white
-            transition-colors duration-300
-          `}
+          className='
+            w-6 h-6 text-white
+             group-hover/dock:text-white 
+           transition-colors duration-300
+          '
         >
           {item.icon}
         </div>
       </div>
 
-      <DockTooltip
-        direction={isVertical ? 'vertical' : 'horizontal'}
-        title={item.title || 'Untitled'}
-      />
+      <DockTooltip direction={'horizontal'} title={item.title || 'Untitled'} />
     </>
   )
 
   const wrapperClasses =
-    'group relative flex items-center justify-center w-12 h-12 md:w-12 md:h-12 rounded-full'
+    'group relative flex items-center justify-center w-12 h-12 rounded-full'
 
   return item.onClick ? (
     <button type='button' onClick={handleClick} className={wrapperClasses}>
