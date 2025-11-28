@@ -2,9 +2,9 @@ import { formatCurrency } from '@/lib/formatCurrency'
 import { imageUrl } from '@/lib/ImageUrl'
 import { getMyOrders } from '@/sanity/lib/orders/getMyOrders'
 import { auth } from '@clerk/nextjs/server'
+import { Cinzel } from 'next/font/google'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import { Cinzel } from 'next/font/google'
 
 const cinzel = Cinzel({
   weight: ['400', '500', '600', '700'],
