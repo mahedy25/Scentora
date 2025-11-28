@@ -46,7 +46,7 @@ export default async function Search({
   // ---- RESULTS ----
   return (
     <div className='min-h-screen py-10'>
-      <div className='max-w-7xl mx-auto bg-white p-4 rounded-xl shadow-sm border border-gray-100'>
+      <div className='max-w-7xl mx-auto bg-white p-4 rounded-xl '>
         <h1
           className={`${cinzel.className} text-3xl font-semibold text-[#670626] mb-10 text-center`}
         >
