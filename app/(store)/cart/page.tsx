@@ -37,11 +37,13 @@ export default function Cart() {
   if (groupedItems.length === 0) {
     return (
       <div className='container min-h-screen mx-auto p-4 flex flex-col items-center h-screen justify-center'>
-        <h1
-          className={`text-3xl ${cinzel.className} text-[#670626] mb-3 tracking-wide`}
-        >
-          My Shopping Cart
-        </h1>
+        <div className='flex justify-center'>
+          <h1
+            className={`text-3xl ${cinzel.className} text-[#670626] mb-2 text-center`}
+          >
+            My Shopping Cart
+          </h1>
+        </div>
 
         {/* Elegant Divider */}
         <div className='w-28 h-1 bg-linear-to-r from-[#670626] via-[#D9004C] to-[#670626] rounded-full mb-6'></div>
