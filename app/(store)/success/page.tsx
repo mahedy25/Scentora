@@ -18,7 +18,6 @@ export default function Success() {
   const sessionId = searchParams.get('session_id')
   const clearCart = useCartStore((state) => state.clearCart)
 
-  // NEW: delay loading state
   const [loadingOrders, setLoadingOrders] = useState(true)
 
   useEffect(() => {
@@ -27,16 +26,15 @@ export default function Success() {
       useCartStore.persist.clearStorage()
     }
 
-    // Delay 3–5 seconds so webhook finishes
     const timer = setTimeout(() => {
       setLoadingOrders(false)
-    }, 4000) // 4 seconds delay
+    }, 4000)
 
     return () => clearTimeout(timer)
   }, [orderNumber, sessionId, clearCart])
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-white px-6 py-10'>
+    <div className='fixed inset-0 z-9999 bg-white flex flex-col items-center justify-center px-6 py-10'>
       <div className='flex justify-center mb-8'>
         <div className='h-24 w-24 bg-[#e9e5dc] rounded-full flex items-center justify-center shadow-md'>
           <svg
@@ -85,7 +83,6 @@ export default function Success() {
       </p>
 
       <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-        {/* View Orders Button */}
         <Button
           asChild={!loadingOrders}
           disabled={loadingOrders}
@@ -110,11 +107,8 @@ export default function Success() {
         </Button>
       </div>
 
-      {/* Spinner style */}
       <style>{`
-        .loader {
-          border-color: #fff;
-        }
+        .loader { border-color: #fff; }
       `}</style>
     </div>
   )

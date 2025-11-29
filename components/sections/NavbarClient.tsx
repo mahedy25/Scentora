@@ -59,7 +59,7 @@ export function NavbarClient({ navItems }: NavbarClientProps) {
       >
         <div
           className='
-            flex items-center gap-3 px-4 py-3 
+            flex items-center w-75 sm:w-full justify-center gap-3 px-4 py-3 
             rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.45)]
             pointer-events-auto transition-all duration-300
 
@@ -134,7 +134,7 @@ function DockIcon({
   onItemClick?: () => void
 }) {
   const baseIconClasses =
-    'relative flex items-center justify-center w-full h-full rounded-full transition-all'
+    'relative flex items-center justify-center w-10 sm:w-full sm:h-full h-10  rounded-full transition-all'
 
 
   const horizontalIconClasses = `
